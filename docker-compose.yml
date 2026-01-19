@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./nextjs-mcp-finance
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MCP_CLOUD_RUN_URL=http://backend:8080
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    env_file:
+      - ./nextjs-mcp-finance/.env
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # FastAPI MCP Backend
+  backend:
+    build:
+      context: ./mcp-finance1/cloud-run
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID:-ttb-lang1}
+      - FIRESTORE_EMULATOR_HOST=firestore:8081
+      - PUBSUB_EMULATOR_HOST=pubsub:8085
+    depends_on:
+      - firestore
+      - pubsub
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # Firestore Emulator for local development
+  firestore:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
+    command: gcloud emulators firestore start --host-port=0.0.0.0:8081
+    ports:
+      - "8081:8081"
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # Pub/Sub Emulator for local development
+  pubsub:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
+    ports:
+      - "8085:8085"
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+networks:
+  mcp-network:
+    driver: bridge
