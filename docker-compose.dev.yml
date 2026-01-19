@@ -1,0 +1,36 @@
+version: '3.8'
+
+# Development overrides - use with:
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  # Frontend with hot-reload
+  frontend:
+    build:
+      context: ./nextjs-mcp-finance
+      dockerfile: Dockerfile.dev
+    volumes:
+      # Mount source code for hot-reload
+      - ./nextjs-mcp-finance/src:/app/src:ro
+      - ./nextjs-mcp-finance/public:/app/public:ro
+      # Exclude node_modules from mount
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+    # Override healthcheck for faster dev startup
+    healthcheck:
+      disable: true
+
+  # Backend with auto-reload
+  backend:
+    volumes:
+      # Mount source code for auto-reload
+      - ./mcp-finance1/cloud-run:/app:ro
+    command: uvicorn main:app --host 0.0.0.0 --port 8080 --reload
+    # Override healthcheck for faster dev startup
+    healthcheck:
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
