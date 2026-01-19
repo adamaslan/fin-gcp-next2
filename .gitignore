@@ -1,0 +1,33 @@
+# Ignore node_modules and Python cache files
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore environment files (all variants)
+.env
+.env.*
+!.env.example
+
+# Ignore frontend and backend folders
+/nextjs-mcp-finance/
+/mcp-finance1/
+
+# Ignore Docker-related files
+*.log
+docker-compose.override.yml
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore security-related files (local audit docs, vulnerability reports)
+SECURITY_CONCERNS.md
+SECURITY_AUDIT_*.md
+*_audit_report.md
+*.vulnerability_report
+security_notes.txt
