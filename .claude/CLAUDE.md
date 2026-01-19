@@ -16,6 +16,42 @@
 - **Stock Data**: Real-time market data integration
 - **Database**: PostgreSQL
 
+## Critical Rules
+
+### NO MOCK DATA - EVER
+
+**This is an absolute rule with no exceptions.**
+
+- **Never create mock functions** that return fake/hardcoded data
+- **Never use placeholder values** for prices, indicators, or analysis results
+- **Never bypass real data sources** with synthetic data
+- **If a service is unavailable**, return an error - do not fake results
+
+**Why this matters:**
+- Mock data in financial applications is dangerous - it can lead to incorrect trading decisions
+- Fake prices/indicators give false confidence in untested code
+- Mock data hides integration issues that will surface in production
+- Users deserve real data or explicit errors, never silent fakes
+
+**What to do instead:**
+- Return HTTP 503 (Service Unavailable) if a dependency is down
+- Log detailed errors explaining what's missing
+- Provide clear setup instructions for required services
+- Use real test data from sandbox/staging environments
+
+```python
+# WRONG - Never do this
+if not service_available:
+    return {"price": 100.0, "signal": "BUY"}  # FAKE DATA
+
+# RIGHT - Fail explicitly
+if not service_available:
+    raise HTTPException(
+        status_code=503,
+        detail="MCP server required for analysis - see setup docs"
+    )
+```
+
 ## Code Standards
 
 ### TypeScript
