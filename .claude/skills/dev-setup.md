@@ -1,4 +1,4 @@
----
+ ---
 name: dev-setup
 description: Initialize complete development environment for MCP Finance. Use when setting up the project for the first time, onboarding new developers, or resetting your development environment.
 ---
@@ -63,16 +63,10 @@ npm install
 ```bash
 cd mcp-finance1/cloud-run
 
-# Option 1: Using existing environment.yml (preferred)
-mamba env create -f environment.yml -n mcp-finance-backend
-
-# Option 2: Using micromamba (faster, standalone)
-micromamba create -f environment.yml -n mcp-finance-backend
-
-# Activate environment
-mamba activate mcp-finance-backend
+# Activate existing environment
+mamba activate fin-ai1
 # OR
-micromamba activate mcp-finance-backend
+micromamba activate fin-ai1
 ```
 
 **What's being installed:**

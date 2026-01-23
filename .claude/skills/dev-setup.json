@@ -1,0 +1,158 @@
+  {
+    "name": "dev-setup",
+    "version": "1.0.0",
+    "description": "Initialize complete development environment for MCP Finance project",
+    "author": "MCP Finance Team",
+    "category": "development",
+    "usage": "/dev-setup [--skip-install] [--skip-db]",
+
+    "parameters": [
+      {
+        "name": "skip-install",
+        "description": "Skip dependency installation",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "skip-db",
+        "description": "Skip database setup",
+        "type": "boolean",
+        "default": false
+      }
+    ],
+
+    "environment": {
+      "NODE_ENV": "development"
+    },
+
+    "steps": [
+      {
+        "name": "welcome",
+        "description": "Display setup information",
+        "command": "echo '🚀 Starting MCP Finance Development Setup...'"
+      },
+      {
+        "name": "check-node",
+        "description": "Verify Node.js installation",
+        "command": "node --version && npm --version",
+        "on_failure": "abort",
+        "error_message": "Node.js is not installed. Please install Node.js 18+ from https://nodejs.org/"
+      },
+      {
+        "name": "check-python",
+        "description": "Verify Python installation",
+        "command": "python3 --version && pip3 --version",
+        "on_failure": "warn",
+        "error_message": "Python 3 is not installed. Some features may not work."
+      },
+      {
+        "name": "check-postgres",
+        "description": "Verify PostgreSQL installation",
+        "command": "psql --version || pg_isready --version",
+        "on_failure": "warn",
+        "error_message": "PostgreSQL is not installed. Database features will not work."
+      },
+      {
+        "name": "install-frontend-deps",
+        "description": "Install Next.js frontend dependencies",
+        "command": "cd nextjs-mcp-finance && npm install",
+        "condition": "!skip-install",
+        "timeout": 300000,
+        "on_failure": "abort",
+        "error_message": "Failed to install frontend dependencies. Check your internet connection."
+      },
+      {
+        "name": "install-backend-deps",
+        "description": "Install Python backend dependencies",
+        "command": "cd mcp-finance1/cloud-run && pip3 install -r requirements.txt",
+        "condition": "!skip-install",
+        "timeout": 180000,
+        "on_failure": "warn",
+        "error_message": "Failed to install Python dependencies. Backend features may not work."
+      },
+      {
+        "name": "setup-frontend-env",
+        "description": "Setup frontend environment variables",
+        "command": "cd nextjs-mcp-finance && [ -f .env.local ] || (cp .env.example .env.local && echo '✓ Created .env.local from .env.example')",
+        "on_failure": "warn"
+      },
+      {
+        "name": "setup-backend-env",
+        "description": "Setup backend environment variables",
+        "command": "cd mcp-finance1 && [ -f .env ] || (cp .env.example .env && echo '✓ Created .env from .env.example')",
+        "on_failure": "warn"
+      },
+      {
+        "name": "check-env-vars",
+        "description": "Check if required environment variables are set",
+        "command": "echo '⚠️  Remember to configure these environment variables:' && echo '  - DATABASE_URL' && echo '  - CLERK_SECRET_KEY' && echo '  - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY' && echo '  - STRIPE_SECRET_KEY'"
+      },
+      {
+        "name": "install-playwright",
+        "description": "Install Playwright browsers for E2E testing",
+        "command": "cd nextjs-mcp-finance && npx playwright install chromium",
+        "condition": "!skip-install",
+        "timeout": 180000,
+        "on_failure": "warn",
+        "error_message": "Failed to install Playwright. E2E tests may not work."
+      },
+      {
+        "name": "check-database",
+        "description": "Check database connection",
+        "command": "cd nextjs-mcp-finance && node -e \"const { Pool } = require('pg'); const pool = new Pool({ connectionString: process.env.DATABASE_URL }); pool.query('SELECT NOW()').then(() => { console.log('✓ Database connection successful'); pool.end(); }).catch((err) => { console.error('✗ Database connection failed:', err.message); process.exit(0); });\"",
+        "condition": "!skip-db",
+        "on_failure": "warn",
+        "error_message": "Could not connect to database. Make sure DATABASE_URL is set correctly."
+      },
+      {
+        "name": "run-migrations",
+        "description": "Run database migrations",
+        "command": "cd nextjs-mcp-finance && npm run db:push 2>/dev/null || npx drizzle-kit push 2>/dev/null || echo '⚠️  No migration command found. You may need to run migrations manually.'",
+        "condition": "!skip-db",
+        "timeout": 60000,
+        "on_failure": "warn"
+      },
+      {
+        "name": "verify-setup",
+        "description": "Verify development setup",
+        "command": "echo '\n✅ Development setup complete!\n' && echo 'Next steps:' && echo '  1. Configure environment variables in .env.local files' && echo '  2. Start frontend: cd nextjs-mcp-finance && npm run dev' && echo '  3. Start backend: cd mcp-finance1/cloud-run && python3 main.py' && echo '  4. Run tests: /test-all' && echo '  5. Check health: /health-check'"
+      }
+    ],
+
+    "post_hooks": [
+      "log-setup-completion"
+    ],
+
+    "on_failure": {
+      "message": "Development setup encountered errors. Check the error messages above and try again.",
+      "cleanup": [
+        "echo '🔍 Troubleshooting tips:' && echo '  - Check your internet connection' && echo '  - Ensure Node.js 18+ is installed' && echo '  - Verify PostgreSQL is running' && echo '  - Check that .env files have correct values'"
+      ]
+    },
+
+    "success_message": "🎉 Development environment is ready! Use 'npm run dev' in nextjs-mcp-finance to start.",
+
+    "examples": [
+      {
+        "command": "/dev-setup",
+        "description": "Full setup with all dependencies"
+      },
+      {
+        "command": "/dev-setup --skip-install",
+        "description": "Setup without reinstalling dependencies"
+      },
+      {
+        "command": "/dev-setup --skip-db",
+        "description": "Setup without database configuration"
+      }
+    ],
+
+    "dependencies": {
+      "tools": ["node", "npm", "python3", "pip3", "psql"],
+      "env_vars": ["DATABASE_URL"],
+      "optional_env_vars": ["CLERK_SECRET_KEY", "STRIPE_SECRET_KEY"]
+    },
+
+    "estimated_duration": "3-5 minutes",
+    "tags": ["setup", "initialization", "development", "onboarding"]
+  }

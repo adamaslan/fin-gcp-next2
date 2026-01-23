@@ -1,0 +1,342 @@
+# GCP-Specific Pattern Database
+# For use with sensitive-data-scan skill
+# Many GCP patterns are context-sensitive: development vs. production environment
+
+patterns:
+  gcp_project_id:
+    name: "GCP Project ID (Context-dependent)"
+    regex: '[a-z]([a-z0-9-]{4,28}[a-z0-9])'
+    severity: WARNING
+    examples:
+      - "my-production-project-123456"
+      - "your-staging-app-v2"
+      - "test-project-temporary"
+    false_positives:
+      - "example-project"
+      - "demo-project-template"
+      - "[PROJECT_ID]"
+      - "your-project"
+      - "my-project"
+    context_analysis:
+      - "Development project: INFO"
+      - "Production project: WARNING"
+      - "If tied to real resources: WARNING"
+    remediation: "Verify environment; redact production project IDs"
+    risk: "Project identification; infrastructure reconnaissance"
+
+  gcp_service_account_email:
+    name: "GCP Service Account Email"
+    regex: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]*\.iam\.gserviceaccount\.com'
+    severity: WARNING
+    examples:
+      - "my-service@my-project-123456.iam.gserviceaccount.com"
+      - "cloud-function@prod-service.iam.gserviceaccount.com"
+    false_positives:
+      - "[SERVICE_ACCOUNT]@gserviceaccount.com"
+      - "@iam.gserviceaccount.com"
+    context:
+      - "Identifies service account in GCP"
+      - "Production accounts are WARNING"
+    remediation: "Verify context; redact production accounts"
+    risk: "Service account identification"
+
+  gcp_service_account_json:
+    name: "GCP Service Account JSON File"
+    regex: '"type":\s*"service_account"[\s\S]*?"private_key"'
+    severity: CRITICAL
+    examples:
+      - '{"type": "service_account", "project_id": "my-project", "private_key": "...", ...}'
+    false_positives: []
+    context:
+      - "Complete service account credentials"
+      - "Full GCP access"
+    remediation: "Delete file immediately; rotate key in GCP Console"
+    risk: "Full GCP service account access with all permissions"
+
+  gcp_service_account_key_id:
+    name: "GCP Service Account Key ID"
+    regex: '[0-9a-f]{40}'
+    severity: INFO
+    examples:
+      - "abc123def456ghi789jkl0123456789012345"
+    false_positives:
+      - "SHA1 hash"
+      - "Git commit hash"
+      - "[KEY_ID]"
+    context:
+      - "Needs context to identify as GCP key"
+    remediation: "Verify if GCP key; if so, rotate"
+    risk: "Useful for reconnaissance if real GCP key"
+
+  gcp_compute_engine_instance:
+    name: "GCP Compute Engine Instance Name"
+    regex: '\b(gce-instance|vm-|compute-|instance-)[a-z0-9-]{1,50}\b'
+    severity: INFO
+    examples:
+      - "gce-instance-web-prod-01"
+      - "vm-api-server-v2"
+    false_positives:
+      - "[INSTANCE_NAME]"
+      - "vm-[TYPE]"
+    context:
+      - "Instance identification"
+      - "Infrastructure topology"
+    remediation: "Verify; production instances are WARNING"
+    risk: "Infrastructure identification"
+
+  gcp_cloud_storage_bucket:
+    name: "GCP Cloud Storage Bucket Name"
+    regex: '\bgs://([a-z0-9._-]+)(?:/|$)'
+    severity: INFO
+    examples:
+      - "gs://my-project-data-bucket"
+      - "gs://production-backups-2025"
+    false_positives:
+      - "gs://[BUCKET_NAME]"
+    context:
+      - "Bucket identification"
+      - "May contain sensitive data location"
+    remediation: "Verify bucket access; redact if sensitive"
+    risk: "Bucket enumeration; data location"
+
+  gcp_database_connection:
+    name: "GCP Cloud SQL Connection String"
+    regex: '([a-z-]+):([a-z]+)://.*@(/cloudsql)?/([a-z-]+):([a-z-]+):([a-z0-9-]+)'
+    severity: WARNING
+    examples:
+      - "postgresql://user:pass@cloudsql/my-project:us-central1:my-db"
+      - "mysql://root:password@/cloudsql/project:region:instance"
+    false_positives:
+      - "[DATABASE_URL]"
+    context:
+      - "Database access credentials"
+      - "Instance identification"
+    remediation: "Redact passwords; verify project"
+    risk: "Database access and instance identification"
+
+  gcp_firestore_collection:
+    name: "GCP Firestore Path/Collection"
+    regex: 'projects/([a-z-]+)/databases/\(default\)/documents/([a-z_/]+)/'
+    severity: INFO
+    examples:
+      - "projects/my-project/databases/(default)/documents/users/user123"
+    false_positives:
+      - "[PROJECT]/databases/(default)/documents/[PATH]"
+    context:
+      - "Firestore document path"
+      - "May contain sensitive data structure"
+    remediation: "Verify if public or sensitive path"
+    risk: "Database structure reconnaissance"
+
+  gcp_pubsub_topic:
+    name: "GCP Pub/Sub Topic Name"
+    regex: 'projects/([a-z-]+)/topics/([a-z0-9_-]+)'
+    severity: INFO
+    examples:
+      - "projects/my-project/topics/user-events"
+      - "projects/prod-app/topics/payment-processed"
+    false_positives:
+      - "[PROJECT]/topics/[TOPIC_NAME]"
+    context:
+      - "Message queue identification"
+      - "Event system topology"
+    remediation: "Verify; production topics may be WARNING"
+    risk: "System architecture disclosure"
+
+  gcp_bigquery_dataset:
+    name: "GCP BigQuery Dataset"
+    regex: 'projects/([a-z-]+)/datasets/([a-z0-9_]+)'
+    severity: WARNING
+    examples:
+      - "projects/my-project/datasets/analytics_prod"
+      - "projects/data-warehouse/datasets/customer_data"
+    false_positives:
+      - "[PROJECT]/datasets/[DATASET]"
+    context:
+      - "Data warehouse identification"
+      - "May contain sensitive data"
+    remediation: "Redact production datasets"
+    risk: "Data warehouse structure and naming"
+
+  gcp_cloud_function:
+    name: "GCP Cloud Function Name"
+    regex: 'projects/([a-z-]+)/locations/([a-z-0-9]+)/functions/([a-z0-9_-]+)'
+    severity: INFO
+    examples:
+      - "projects/my-project/locations/us-central1/functions/processPayment"
+      - "projects/app/locations/europe-west1/functions/handleWebhook"
+    false_positives:
+      - "[PROJECT]/locations/[REGION]/functions/[NAME]"
+    context:
+      - "Function identification"
+      - "Infrastructure topology"
+    remediation: "Verify; redact if production"
+    risk: "Function structure and naming"
+
+  gcp_cloud_run_service:
+    name: "GCP Cloud Run Service URL"
+    regex: 'https://([a-z0-9-]+)(-[a-z]{2})?\.run\.app(?:/|$)'
+    severity: INFO
+    examples:
+      - "https://my-api-service-us.run.app"
+      - "https://processing-function-eu.run.app/v1"
+    false_positives:
+      - "https://[SERVICE]-[REGION].run.app"
+    context:
+      - "Service endpoint"
+      - "Public URL (if assigned)"
+    remediation: "Generally safe; verify if URL is public"
+    risk: "Service endpoint discovery"
+
+  gcp_api_key:
+    name: "GCP API Key (Browser or Server Key)"
+    regex: 'AIzaSy[A-Za-z0-9_-]{35}'
+    severity: CRITICAL
+    examples:
+      - "AIzaSyArpa-oXY6lWHR3qI5F7hHCMcE2Pny02UU"
+    false_positives:
+      - "AIzaSy[A-Z]{35}  # Example"
+      - "[GOOGLE_API_KEY]"
+    context:
+      - "Gives access to enabled GCP APIs"
+      - "May be restricted by IP or domain"
+    remediation: "Rotate immediately at console.cloud.google.com/apis/credentials"
+    risk: "Full access to all project's enabled APIs"
+
+  gcp_oauth_client_id:
+    name: "GCP OAuth 2.0 Client ID"
+    regex: '[a-z0-9]{32}\.apps\.googleusercontent\.com'
+    severity: WARNING
+    examples:
+      - "1234567890abcdefghijklmnopqrstuv.apps.googleusercontent.com"
+    false_positives:
+      - "[CLIENT_ID].apps.googleusercontent.com"
+    context:
+      - "OAuth client identification"
+      - "Often public but identifies application"
+    remediation: "Verify if public or sensitive; may need client secret rotation"
+    risk: "OAuth application identification"
+
+  gcp_oauth_client_secret:
+    name: "GCP OAuth 2.0 Client Secret"
+    regex: 'GOCSPX-[A-Za-z0-9_-]{24,}'
+    severity: CRITICAL
+    examples:
+      - "GOCSPX-abcdefghijklmnopqrstuvwxyz"
+    false_positives:
+      - "GOCSPX-[SECRET]"
+    context:
+      - "OAuth secret for server-side auth"
+      - "Enables token generation"
+    remediation: "Rotate immediately; regenerate client secret"
+    risk: "OAuth token generation capability"
+
+  gcp_access_token:
+    name: "GCP Access Token (Bearer)"
+    regex: 'ya29\.[A-Za-z0-9_-]{100,}'
+    severity: CRITICAL
+    examples:
+      - "ya29.a0AfH6SMBx-example-token-string-here"
+    false_positives: []
+    context:
+      - "Short-lived access token"
+      - "Time-limited but current access"
+    remediation: "Token will expire; rotate if long-lived"
+    risk: "Current GCP API access"
+
+  gcp_refresh_token:
+    name: "GCP Refresh Token"
+    regex: '1//\d[A-Za-z0-9_-]{30,}'
+    severity: CRITICAL
+    examples:
+      - "1//1234567890abcdefghijklmnopqrstuv"
+    false_positives: []
+    context:
+      - "Long-lived token"
+      - "Can regenerate access tokens"
+    remediation: "Revoke immediately"
+    risk: "Persistent API access generation"
+
+  gcp_impersonation_token:
+    name: "GCP Service Account Impersonation"
+    regex: 'impersonateServiceAccount.*?[a-z0-9-]+@[a-z0-9-]+\.iam\.gserviceaccount\.com'
+    severity: CRITICAL
+    examples:
+      - "impersonateServiceAccount: my-service@my-project.iam.gserviceaccount.com"
+    false_positives: []
+    context:
+      - "Service account impersonation setup"
+      - "Cross-service access"
+    remediation: "Verify IAM policy; remove excessive impersonation permissions"
+    risk: "Service account hijacking"
+
+  gcp_custom_metric:
+    name: "GCP Custom Metric Name"
+    regex: 'custom\.googleapis\.com/([a-z0-9/_-]+)'
+    severity: INFO
+    examples:
+      - "custom.googleapis.com/app/custom_metric"
+    false_positives:
+      - "custom.googleapis.com/[METRIC]"
+    context:
+      - "Custom metric identification"
+      - "Application-specific monitoring"
+    remediation: "Generally safe; verify if metric name reveals secrets"
+    risk: "Monitoring structure disclosure"
+
+  gcp_secret_name:
+    name: "GCP Secret Manager Secret Name"
+    regex: 'projects/([a-z-]+)/secrets/([a-z0-9_-]+)'
+    severity: WARNING
+    examples:
+      - "projects/my-project/secrets/database_password"
+      - "projects/app/secrets/api_key_stripe"
+    false_positives:
+      - "[PROJECT]/secrets/[NAME]"
+    context:
+      - "Secret identification"
+      - "Name may reveal secret content"
+    remediation: "Verify; redact if name reveals secret type"
+    risk: "Secret naming convention disclosure"
+
+  gcp_kms_key:
+    name: "GCP Cloud KMS Key"
+    regex: 'projects/([a-z-]+)/locations/([a-z-0-9]+)/keyRings/([a-z0-9_-]+)/cryptoKeys/([a-z0-9_-]+)'
+    severity: WARNING
+    examples:
+      - "projects/my-project/locations/us/keyRings/prod-keys/cryptoKeys/db-encryption-key"
+    false_positives:
+      - "[PROJECT]/locations/[LOCATION]/keyRings/[RING]/cryptoKeys/[KEY]"
+    context:
+      - "Encryption key identification"
+      - "May indicate encryption usage"
+    remediation: "Verify; redact if sensitive key"
+    risk: "Key structure and naming disclosure"
+
+  gcp_iam_policy:
+    name: "GCP IAM Policy (Service Account Permissions)"
+    regex: '"roles/[a-z.]+"\s*:\s*\[.*?[a-z0-9]+@[a-z0-9-]+\.iam\.gserviceaccount\.com'
+    severity: WARNING
+    examples:
+      - '"roles/editor": ["my-service@project.iam.gserviceaccount.com"]'
+    false_positives:
+      - "[ROLE]: [[SERVICE_ACCOUNT]]"
+    context:
+      - "IAM permission configuration"
+      - "Over-privileged accounts"
+    remediation: "Verify least privilege; redact if unusual"
+    risk: "Permission configuration disclosure"
+
+  gcp_resource_name:
+    name: "GCP Resource Name (Generic)"
+    regex: '(//[a-z]+\.googleapis\.com/[a-z]+/[a-z0-9/-]+)'
+    severity: INFO
+    examples:
+      - "//compute.googleapis.com/projects/my-project/zones/us-central1-a/instances/my-vm"
+    false_positives:
+      - "[RESOURCE_NAME]"
+    context:
+      - "Generic resource identification"
+    remediation: "Verify; usually safe but may reveal infrastructure"
+    risk: "Infrastructure topology"
+

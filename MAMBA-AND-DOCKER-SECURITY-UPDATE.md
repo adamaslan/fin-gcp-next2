@@ -33,10 +33,8 @@ pip3 install -r requirements.txt
 
 **After:**
 ```bash
-# Using mamba (preferred)
-mamba env create -f environment.yml -n mcp-finance-backend
-# OR using micromamba (faster, standalone)
-micromamba create -f environment.yml -n mcp-finance-backend
+# Activate existing environment
+mamba activate fin-ai1
 ```
 
 ---
@@ -56,7 +54,7 @@ python3 main.py &
 **After:**
 ```bash
 cd mcp-finance1/cloud-run
-mamba activate mcp-finance-backend || micromamba activate mcp-finance-backend
+mamba activate fin-ai1
 python3 main.py &
 ```
 
@@ -75,7 +73,7 @@ python3 main.py &
 mamba --version || micromamba --version
 
 # Check mamba environment exists
-mamba env list | grep mcp-finance-backend
+mamba env list | grep fin-ai1
 
 # Check Python (within mamba environment)
 python3 --version
@@ -285,8 +283,7 @@ trivy image mcp-finance-backend:latest
 pip3 install -r requirements.txt
 
 # New (mamba)
-mamba env create -f environment.yml -n mcp-finance-backend
-mamba activate mcp-finance-backend
+mamba activate fin-ai1
 ```
 
 ### Health Check
@@ -294,7 +291,7 @@ mamba activate mcp-finance-backend
 # Now checks:
 mamba --version || micromamba --version
 mamba env list | grep mcp-finance-backend
-```
+```fin-ai1
 
 ### MCP Server Start
 ```bash
@@ -303,7 +300,7 @@ cd mcp-finance1/cloud-run && python3 main.py
 
 # New
 cd mcp-finance1/cloud-run
-mamba activate mcp-finance-backend
+mamba activate fin-ai1
 python3 main.py
 ```
 

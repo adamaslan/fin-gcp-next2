@@ -24,7 +24,7 @@ curl -s http://localhost:8000/health && echo "✅ MCP Server is running" || echo
 cd mcp-finance1/cloud-run
 
 # Activate mamba environment first
-mamba activate mcp-finance-backend || micromamba activate mcp-finance-backend
+mamba activate fin-ai1
 
 # Start server
 python3 main.py &
@@ -104,10 +104,7 @@ python3 main.py
 cd mcp-finance1/cloud-run
 
 # Activate mamba environment
-mamba activate mcp-finance-backend
-
-# If environment doesn't exist, create it
-mamba env create -f environment.yml -n mcp-finance-backend
+mamba activate fin-ai1
 
 # Verify packages installed
 mamba list
