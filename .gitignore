@@ -44,6 +44,7 @@ nu-docs/*_EXECUTION_*.md
 # Backend test results (contain real API responses)
 backend_test_results/
 logs/
+nu-logs/
 
 # Safe to keep for documentation (explicitly allowed)
 !backend_test_results/*/SAFE_REPORT.md
@@ -137,6 +138,9 @@ test_*.txt
 temp_*.json
 tmp/
 .tmp/
+
+# Local overview docs (generated summaries; not tracked)
+overview/
 
 # ============================================================================
 # OS-Specific Files
