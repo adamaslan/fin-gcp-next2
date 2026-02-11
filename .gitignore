@@ -36,10 +36,34 @@ security_notes.txt
 # Security: Sensitive Documentation & Test Results with Exposed Credentials
 # ============================================================================
 
+# Quarantined sensitive files (real GCP project IDs, emails, service URLs)
+**/soosensitive/
+
+# Firestore docs with real project IDs and email addresses
+FIRESTORE_*.md
+GCP_SERVICES_USAGE.md
+PIPELINE_OPTIMIZATION_SUMMARY.md
+ENVIRONMENT_TEST_REPORT.md
+SCRIPT_EXECUTION_REPORT.md
+EXECUTION_METHODS_SUMMARY.md
+BACKEND_IMPLEMENTATION_COMPLETE.md
+FILE_REORGANIZATION_PLAN.md
+GUIDE.md
+GUIDE-ENHANCED.md
+
+# Test scripts with real Cloud Run URLs or project IDs
+gcloud_mcp_test.py
+
+# Skill files with example API key patterns (triggers GitHub secret scanning)
+.claude/skills/sensitive-data-scan/patterns/
+.claude/skills/sensitive-data-scan/SKILL.md
+.claude/skills/sensitive-doc-creator/templates/redaction-guide.md
+
 # Backend execution reports (may contain exposed API keys)
 nu-docs/BACKEND_EXECUTION_REPORT.md
 nu-docs/BACKEND_EXECUTION_RUNBOOK.md
 nu-docs/*_EXECUTION_*.md
+nu-docs/GCLOUD_MCP_STATUS.md
 
 # Backend test results (contain real API responses)
 backend_test_results/
