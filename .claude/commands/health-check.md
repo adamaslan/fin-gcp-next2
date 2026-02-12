@@ -44,7 +44,7 @@ curl -s http://localhost:8000/health > /dev/null && echo "✅ MCP Server: Runnin
 mamba --version > /dev/null 2>&1 && echo "✅ Mamba: Installed" || (micromamba --version > /dev/null 2>&1 && echo "✅ Micromamba: Installed" || echo "❌ Mamba/Micromamba: Not installed")
 
 # Check mamba environment exists
-mamba env list | grep mcp-finance-backend > /dev/null 2>&1 && echo "✅ MCP Backend Environment: Exists" || echo "❌ MCP Backend Environment: Not created"
+mamba env list | grep fin-ai1 > /dev/null 2>&1 && echo "✅ MCP Backend Environment: Exists" || echo "❌ MCP Backend Environment: Not created"
 
 # Check Python (within mamba environment)
 python3 --version && echo "✅ Python: Installed" || echo "❌ Python: Not found"
@@ -131,14 +131,8 @@ cat .env.local | grep DATABASE_URL || echo "Add DATABASE_URL to .env.local"
 **If MCP Server Not Running:**
 ```bash
 cd mcp-finance1/cloud-run
-mamba activate mcp-finance-backend
+mamba activate fin-ai1
 python3 main.py
-```
-
-**If Mamba Environment Not Created:**
-```bash
-cd mcp-finance1/cloud-run
-mamba env create -f environment.yml -n mcp-finance-backend
 ```
 
 **If Dependencies Missing:**

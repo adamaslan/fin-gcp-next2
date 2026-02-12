@@ -94,11 +94,8 @@ curl -Ls https://micro.mamba.pm/install.sh | bash
 # 1. Navigate to backend directory
 cd mcp-finance1/cloud-run
 
-# 2. Create mamba environment
-mamba env create -f environment.yml
-
-# 3. Activate environment
-mamba activate mcp-finance-backend
+   # 2. Activate existing mamba environment
+mamba activate fin-ai1
 
 # 4. Set environment variables
 export GCP_PROJECT_ID="your-project-id"
@@ -360,7 +357,7 @@ User's global mamba rules are followed:
 **Solution**: Ensure mamba environment is activated:
 
 ```bash
-mamba activate mcp-finance-backend
+mamba activate fin-ai1
 python main.py
 ```
 
