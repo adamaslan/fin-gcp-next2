@@ -1,0 +1,1190 @@
+{
+  "test_timestamp": "2026-02-12T14:33:13Z",
+  "service_url": "https://options-mcp-backend-cif7ppahzq-uc.a.run.app",
+  "endpoints": {
+    "GET /": {
+      "status_code": 200,
+      "elapsed_seconds": 0.36,
+      "response": {
+        "service": "Options MCP Backend",
+        "version": "2.0.0",
+        "status": "healthy",
+        "mcp_available": true,
+        "ai_available": true,
+        "pipeline_available": true
+      }
+    },
+    "GET /health": {
+      "status_code": 200,
+      "elapsed_seconds": 0.55,
+      "response": {
+        "status": "degraded",
+        "checks": {
+          "mcp_server": "ok",
+          "python": "3.11.14 | packaged by conda-forge | (main, Jan 26 2026, 23:48:32) [GCC 14.3.0]",
+          "yfinance": "ok"
+        }
+      }
+    },
+    "POST /api/options-risk": {
+      "status_code": 200,
+      "elapsed_seconds": 0.81,
+      "response": {
+        "success": true,
+        "data": {
+          "symbol": "AAPL",
+          "timestamp": "2026-02-12T19:33:14.733717",
+          "current_price": 261.98,
+          "expiration_date": "2026-02-13",
+          "days_to_expiration": 0,
+          "available_expirations": [
+            "2026-02-13",
+            "2026-02-18",
+            "2026-02-20",
+            "2026-02-23",
+            "2026-02-25",
+            "2026-02-27",
+            "2026-03-06",
+            "2026-03-13",
+            "2026-03-20",
+            "2026-03-27"
+          ],
+          "calls": {
+            "total_contracts": 58,
+            "liquid_contracts": 18,
+            "total_volume": 291780,
+            "total_open_interest": 142492,
+            "avg_implied_volatility": 115.49909859071927,
+            "max_iv": 687.6954528808594,
+            "min_iv": 30.225307128906252,
+            "atm_strike": 262.5,
+            "atm_iv": 31.690136230468745,
+            "atm_delta": null,
+            "top_volume_strikes": [
+              {
+                "strike": 275.0,
+                "volume": 49164,
+                "iv": 33.98503515625
+              },
+              {
+                "strike": 270.0,
+                "volume": 38872,
+                "iv": 30.713583496093744
+              },
+              {
+                "strike": 265.0,
+                "volume": 35300,
+                "iv": 30.347376220703122
+              },
+              {
+                "strike": 272.5,
+                "volume": 33332,
+                "iv": 32.617861328124995
+              },
+              {
+                "strike": 277.5,
+                "volume": 30208,
+                "iv": 37.305314453125
+              }
+            ],
+            "top_oi_strikes": [
+              {
+                "strike": 280.0,
+                "open_interest": 27737,
+                "iv": 39.45373046875
+              },
+              {
+                "strike": 285.0,
+                "open_interest": 22144,
+                "iv": 46.0942890625
+              },
+              {
+                "strike": 290.0,
+                "open_interest": 17399,
+                "iv": 50.0005
+              },
+              {
+                "strike": 282.5,
+                "open_interest": 10024,
+                "iv": 41.79745703125
+              },
+              {
+                "strike": 275.0,
+                "open_interest": 8514,
+                "iv": 33.98503515625
+              }
+            ]
+          },
+          "puts": {
+            "total_contracts": 54,
+            "liquid_contracts": 25,
+            "total_volume": 228055,
+            "total_open_interest": 105591,
+            "avg_implied_volatility": 98.49170010941117,
+            "max_iv": 275.0003125,
+            "min_iv": 0.0010000000000000002,
+            "atm_strike": 262.5,
+            "atm_iv": 29.29758203124999,
+            "atm_delta": null,
+            "top_volume_strikes": [
+              {
+                "strike": 260.0,
+                "volume": 53259,
+                "iv": 31.128618408203117
+              },
+              {
+                "strike": 270.0,
+                "volume": 42953,
+                "iv": 29.590547851562498
+              },
+              {
+                "strike": 267.5,
+                "volume": 24803,
+                "iv": 28.516339843749993
+              },
+              {
+                "strike": 265.0,
+                "volume": 24690,
+                "iv": 28.49192602539062
+              },
+              {
+                "strike": 272.5,
+                "volume": 19691,
+                "iv": 41.1138701171875
+              }
+            ],
+            "top_oi_strikes": [
+              {
+                "strike": 260.0,
+                "open_interest": 10751,
+                "iv": 31.128618408203117
+              },
+              {
+                "strike": 275.0,
+                "open_interest": 7596,
+                "iv": 42.529871582031255
+              },
+              {
+                "strike": 270.0,
+                "open_interest": 6347,
+                "iv": 29.590547851562498
+              },
+              {
+                "strike": 265.0,
+                "open_interest": 6204,
+                "iv": 28.49192602539062
+              },
+              {
+                "strike": 272.5,
+                "open_interest": 5416,
+                "iv": 41.1138701171875
+              }
+            ]
+          },
+          "put_call_ratio": {
+            "volume": 0.7815991500445542,
+            "open_interest": 0.741031075428796
+          },
+          "risk_warnings": [
+            "High implied volatility (115.5%) - options are expensive, consider selling strategies or spreads",
+            "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+          ],
+          "opportunities": [],
+          "liquidity_threshold": 75
+        }
+      }
+    },
+    "POST /api/options-summary": {
+      "status_code": 200,
+      "elapsed_seconds": 0.54,
+      "response": {
+        "success": true,
+        "data": {
+          "symbol": "AAPL",
+          "timestamp": "2026-02-12T19:33:15.110495",
+          "current_price": 261.98,
+          "nearest_expiration": "2026-02-13",
+          "days_to_expiration": 0,
+          "atm_call_iv": 31.690136230468745,
+          "atm_put_iv": 29.29758203124999,
+          "put_call_ratio_volume": 0.7815991500445542,
+          "total_call_volume": 291780,
+          "total_put_volume": 228055,
+          "sentiment": "neutral",
+          "risk_level": "high"
+        }
+      }
+    },
+    "POST /api/options-vehicle": {
+      "status_code": 200,
+      "elapsed_seconds": 0.7,
+      "response": {
+        "success": true,
+        "data": {
+          "vehicle": "option_call",
+          "reasoning": "Consider ATM calls for directional bullish play",
+          "dte_range": [
+            30,
+            45
+          ],
+          "delta_range": [
+            0.4,
+            0.6
+          ],
+          "spread_type": null,
+          "spread_width_info": null,
+          "expected_move_percent": 3.0,
+          "symbol": "AAPL",
+          "volatility_regime": "medium",
+          "timestamp": "2026-02-12T19:33:16.032040"
+        }
+      }
+    },
+    "POST /api/options-compare": {
+      "status_code": 200,
+      "elapsed_seconds": 1.53,
+      "response": {
+        "success": true,
+        "data": {
+          "timestamp": "2026-02-12T19:33:17.576957",
+          "metric": "iv",
+          "symbols": [
+            {
+              "symbol": "NVDA",
+              "current_price": 189.42,
+              "atm_iv": 38.98986791992188,
+              "put_call_ratio": 0.5562832421719914,
+              "total_volume": 948620,
+              "liquid_contracts": 55
+            },
+            {
+              "symbol": "AAPL",
+              "current_price": 261.85,
+              "atm_iv": 32.37372314453124,
+              "put_call_ratio": 0.7816094317636576,
+              "total_volume": 519838,
+              "liquid_contracts": 43
+            },
+            {
+              "symbol": "MSFT",
+              "current_price": 405.715,
+              "atm_iv": 25.72095764160156,
+              "put_call_ratio": 0.6976670212025725,
+              "total_volume": 170787,
+              "liquid_contracts": 68
+            }
+          ],
+          "ranked_by": "Highest ATM implied volatility first"
+        }
+      }
+    },
+    "POST /api/spread-trade (OPEN)": {
+      "status_code": 200,
+      "elapsed_seconds": 6.83,
+      "response": {
+        "success": true,
+        "data": {
+          "symbol": "AAPL",
+          "spread_type": "bull_call",
+          "action": "open",
+          "current_price": 261.85,
+          "expiration": "2026-02-13",
+          "dte": 0,
+          "buy_strike": 260.0,
+          "sell_strike": 265.0,
+          "contracts": 1,
+          "spread_width": 5.0,
+          "buy_leg": {
+            "strike": 260.0,
+            "bid": 3.65,
+            "ask": 3.7,
+            "iv": 34.62,
+            "delta": null,
+            "volume": 4020.0,
+            "open_interest": 2012
+          },
+          "sell_leg": {
+            "strike": 265.0,
+            "bid": 1.14,
+            "ask": 1.15,
+            "iv": 30.86,
+            "delta": null,
+            "volume": 35300.0,
+            "open_interest": 2578
+          },
+          "is_credit": false,
+          "max_profit": 244.0,
+          "max_loss": 256.0,
+          "risk_reward_ratio": 0.95,
+          "breakeven": 262.56,
+          "net_delta": 0,
+          "ai_analysis": {
+            "trade_assessment": {
+              "quality": "POOR",
+              "conviction": "LOW",
+              "explanation": "This is a very short-dated bull call spread on AAPL. With 0 DTE, this trade is essentially gambling. The small potential profit doesn't justify the risk, and even minor price fluctuations can lead to significant losses."
+            },
+            "timing": {
+              "is_good_timing": false,
+              "dte_assessment": "0 DTE is far too short for a directional strategy. This is more of a binary bet than a trade.",
+              "iv_context": "Implied volatility is elevated due to the expiration date being today. IV crush will be a major factor.",
+              "recommendation": "Do not enter this trade with 0 DTE. Consider a similar setup with a longer expiration."
+            },
+            "risk_analysis": {
+              "risk_reward_quality": "The risk/reward ratio of 0.95 is unfavorable, especially considering the high probability of rapid price swings with 0 DTE. This means you risk more than you potentially gain.",
+              "max_loss_acceptable": "Max loss is potentially unacceptable given the likelihood of it being reached with 0 DTE.",
+              "probability_estimate": "The probability of profit is extremely low due to the short timeframe and the fact that AAPL needs to move significantly to cover the cost of the spread and be in profit.",
+              "key_risks": [
+                "Rapid price fluctuations",
+                "Theta decay (time decay)",
+                "Implied Volatility crush",
+                "Assignment risk at expiration",
+                "AAPL fails to breach 262.56 by expiration"
+              ]
+            },
+            "execution_tips": [
+              "Given the analysis, execution is not recommended. However, if you insist, use a limit order at the mid-price to improve your fill.",
+              "The bid/ask spreads are relatively tight so expect a decent fill at mid price"
+            ],
+            "management_plan": {
+              "profit_target": "N/A (Not recommended to open)",
+              "stop_loss": "Immediate stop loss if the price moves against you. This trade moves too fast to implement a set point. But best to close trade.",
+              "adjustment_triggers": [
+                "N/A"
+              ],
+              "time_stop": "N/A (Close the trade immediately if opened by accident)"
+            },
+            "alternatives": [
+              {
+                "strategy": "Bull Call Spread with Longer Expiration",
+                "why_better": "Reduces the impact of theta decay and gives the stock more time to move in the desired direction. Provides a more balanced risk/reward.",
+                "strikes": "Buy $260 Call, Sell $265 Call, Expiration in 30-60 days"
+              },
+              {
+                "strategy": "Bull Put Spread",
+                "why_better": "If you are bullish on AAPL, consider a Bull Put Spread (selling a lower put and buying a lower strike put). It profits if the stock stays above your short put strike.",
+                "strikes": "Sell $255 Put, Buy $250 Put, Expiration in 30-60 days"
+              }
+            ],
+            "verdict": {
+              "decision": "NO_GO",
+              "reasoning": "The 0 DTE makes this trade exceptionally risky with a poor risk/reward profile. The probability of profit is very low, and losses could be significant given rapid price fluctuations and theta decay.",
+              "conditions_to_revisit": "Revisit with an expiration date at least 30-60 days out and a more favorable risk/reward ratio. Also, reconsider if implied volatility is more favorable."
+            }
+          }
+        }
+      }
+    },
+    "POST /api/spread-trade (CLOSE)": {
+      "status_code": 200,
+      "elapsed_seconds": 6.96,
+      "response": {
+        "success": true,
+        "data": {
+          "symbol": "AAPL",
+          "spread_type": "bear_put",
+          "action": "close",
+          "current_price": 261.8401,
+          "expiration": "2026-02-13",
+          "dte": 0,
+          "buy_strike": 265.0,
+          "sell_strike": 260.0,
+          "contracts": 1,
+          "spread_width": 5.0,
+          "buy_leg": {
+            "strike": 265.0,
+            "bid": 3.9,
+            "ask": 4.05,
+            "iv": 27.05,
+            "delta": null,
+            "volume": 24690.0,
+            "open_interest": 6204
+          },
+          "sell_leg": {
+            "strike": 260.0,
+            "bid": 1.5,
+            "ask": 1.54,
+            "iv": 30.45,
+            "delta": null,
+            "volume": 53259.0,
+            "open_interest": 10751
+          },
+          "is_credit": false,
+          "max_profit": 245.0,
+          "max_loss": 255.0,
+          "risk_reward_ratio": 0.96,
+          "breakeven": 262.45,
+          "net_delta": 0,
+          "ai_analysis": {
+            "trade_assessment": {
+              "quality": "EXCELLENT",
+              "conviction": "HIGH",
+              "explanation": "Closing a Bear Put spread with 0 DTE is generally an excellent decision. There's practically no time left for the underlying asset (AAPL) to move significantly and make the spread profitable. Holding it would be purely speculative gambling at this point."
+            },
+            "timing": {
+              "is_good_timing": true,
+              "dte_assessment": "Extremely favorable. With 0 DTE, the time decay (theta) is at its maximum, rapidly eroding any remaining value in the options.",
+              "iv_context": "Implied Volatility is relatively high, especially on the short put, which slightly favors closing as that premium will likely erode rapidly.",
+              "recommendation": "Close the position immediately to capture any remaining profit or minimize any remaining loss."
+            },
+            "risk_analysis": {
+              "risk_reward_quality": "The risk/reward is irrelevant at 0 DTE. The primary goal is to minimize any further losses or lock in any remaining profits.",
+              "max_loss_acceptable": "Unacceptable at 0 DTE. Any potential loss at this point is largely due to spread slippage rather than genuine directional movement.",
+              "probability_estimate": "The probability of a significant move in AAPL in the next few hours to make the spread profitable is extremely low.",
+              "key_risks": [
+                "Unexpected after-hours news event that drastically affects AAPL's price (very unlikely).",
+                "Wider than expected bid/ask spread when closing."
+              ]
+            },
+            "execution_tips": [
+              "Try to close the entire spread as a single unit to avoid legging risk and get a better fill.",
+              "Walk the bid/ask price slightly to find a buyer willing to meet you in the middle.",
+              "If the spread is wide, consider closing the legs individually, starting with the short put, if the bid/ask allows for favorable pricing. However, be aware of legging risk."
+            ],
+            "management_plan": {
+              "profit_target": "N/A - At 0 DTE, the goal is simply to close the position.",
+              "stop_loss": "N/A - At 0 DTE, a stop loss is unnecessary. Close the position.",
+              "adjustment_triggers": [
+                "N/A - The trade should not be adjusted at 0 DTE."
+              ],
+              "time_stop": "Immediate - Close the position as soon as possible."
+            },
+            "alternatives": [
+              {
+                "strategy": "Cash Secured Put",
+                "why_better": "If bullish on AAPL, and looking to enter at a specific price, sell a cash secured put at a lower strike price and further out in time.",
+                "strikes": "AAPL $250 Strike, 30-60 DTE"
+              },
+              {
+                "strategy": "Covered Call",
+                "why_better": "If bullish on AAPL and already holding shares, consider writing covered calls against your position for income generation.",
+                "strikes": "AAPL $270 Strike, 30-60 DTE"
+              }
+            ],
+            "verdict": {
+              "decision": "GO",
+              "reasoning": "Closing this Bear Put spread at 0 DTE is the rational decision to eliminate unnecessary risk and potentially capture any small remaining profit. There is no logical reason to hold it any longer.",
+              "conditions_to_revisit": "N/A - Close immediately."
+            }
+          }
+        }
+      }
+    },
+    "POST /api/options-enhanced": {
+      "status_code": 200,
+      "elapsed_seconds": 4.97,
+      "response": {
+        "success": true,
+        "data": {
+          "risk_analysis": {
+            "status": "ok",
+            "error": null,
+            "data": {
+              "symbol": "AAPL",
+              "timestamp": "2026-02-12T19:33:34.726696+00:00",
+              "current_price": 262.42,
+              "expiration_date": "2026-02-13",
+              "days_to_expiration": 0,
+              "available_expirations": [
+                "2026-02-13",
+                "2026-02-18",
+                "2026-02-20"
+              ],
+              "calls": {
+                "total_contracts": 76,
+                "liquid_contracts": 19,
+                "total_volume": 175352,
+                "total_open_interest": 133682,
+                "avg_implied_volatility": 164.73960526315787,
+                "max_iv": 571.29,
+                "min_iv": 26.07,
+                "atm_strike": 262.5,
+                "atm_iv": 45.49,
+                "atm_delta": 0.9275,
+                "top_volume_strikes": [
+                  {
+                    "strike": 280.0,
+                    "volume": 52260,
+                    "iv": 26.229999999999997
+                  },
+                  {
+                    "strike": 277.5,
+                    "volume": 24436,
+                    "iv": 26.93
+                  },
+                  {
+                    "strike": 275.0,
+                    "volume": 20224,
+                    "iv": 28.610000000000003
+                  },
+                  {
+                    "strike": 290.0,
+                    "volume": 19789,
+                    "iv": 29.48
+                  },
+                  {
+                    "strike": 285.0,
+                    "volume": 19677,
+                    "iv": 27.21
+                  }
+                ],
+                "top_oi_strikes": [
+                  {
+                    "strike": 280.0,
+                    "open_interest": 26457,
+                    "iv": 26.229999999999997
+                  },
+                  {
+                    "strike": 285.0,
+                    "open_interest": 19453,
+                    "iv": 27.21
+                  },
+                  {
+                    "strike": 290.0,
+                    "open_interest": 11513,
+                    "iv": 29.48
+                  },
+                  {
+                    "strike": 275.0,
+                    "open_interest": 10330,
+                    "iv": 28.610000000000003
+                  },
+                  {
+                    "strike": 282.5,
+                    "open_interest": 8199,
+                    "iv": 26.07
+                  }
+                ]
+              },
+              "puts": {
+                "total_contracts": 76,
+                "liquid_contracts": 18,
+                "total_volume": 95436,
+                "total_open_interest": 93569,
+                "avg_implied_volatility": 87.59565789473683,
+                "max_iv": 390.07,
+                "min_iv": 0.0,
+                "atm_strike": 262.5,
+                "atm_iv": 39.05,
+                "atm_delta": -0.0453,
+                "top_volume_strikes": [
+                  {
+                    "strike": 275.0,
+                    "volume": 27621,
+                    "iv": 27.699999999999996
+                  },
+                  {
+                    "strike": 277.5,
+                    "volume": 18225,
+                    "iv": 25.95
+                  },
+                  {
+                    "strike": 272.5,
+                    "volume": 12095,
+                    "iv": 29.54
+                  },
+                  {
+                    "strike": 270.0,
+                    "volume": 10746,
+                    "iv": 31.64
+                  },
+                  {
+                    "strike": 280.0,
+                    "volume": 6290,
+                    "iv": 25.31
+                  }
+                ],
+                "top_oi_strikes": [
+                  {
+                    "strike": 230.0,
+                    "open_interest": 11418,
+                    "iv": 85.4
+                  },
+                  {
+                    "strike": 260.0,
+                    "open_interest": 10266,
+                    "iv": 41.25
+                  },
+                  {
+                    "strike": 265.0,
+                    "open_interest": 5607,
+                    "iv": 36.04
+                  },
+                  {
+                    "strike": 285.0,
+                    "open_interest": 5429,
+                    "iv": 0.0
+                  },
+                  {
+                    "strike": 255.0,
+                    "open_interest": 5170,
+                    "iv": 48.18
+                  }
+                ]
+              },
+              "put_call_ratio": {
+                "volume": 0.5442538436972489,
+                "open_interest": 0.6999371643153155
+              },
+              "risk_warnings": [
+                "High implied volatility (164.7%) - options are expensive, consider selling strategies or spreads",
+                "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+              ],
+              "opportunities": [
+                "Low Put/Call Volume Ratio (0.54) - bullish sentiment, heavy call buying"
+              ],
+              "liquidity_threshold": 75
+            }
+          },
+          "summary": {
+            "status": "ok",
+            "error": null,
+            "data": {
+              "symbol": "AAPL",
+              "timestamp": "2026-02-12T19:33:35.149860+00:00",
+              "current_price": 262.42,
+              "nearest_expiration": "2026-02-13",
+              "days_to_expiration": 0,
+              "atm_call_iv": 45.49,
+              "atm_put_iv": 39.05,
+              "put_call_ratio_volume": 0.5442538436972489,
+              "total_call_volume": 175352,
+              "total_put_volume": 95436,
+              "sentiment": "bullish",
+              "risk_level": "high"
+            }
+          },
+          "vehicle_recommendation": {
+            "status": "ok",
+            "error": null,
+            "data": {
+              "vehicle": "option_spread",
+              "reasoning": "High volatility suitable for spreads; consider bull call spread for defined risk",
+              "dte_range": [
+                30,
+                45
+              ],
+              "delta_range": [
+                0.4,
+                0.6
+              ],
+              "spread_type": "Bull Call Spread",
+              "spread_width_info": "Width typically 1x ATR equivalent for 3.0% expected move",
+              "expected_move_percent": 3.0,
+              "symbol": "AAPL",
+              "volatility_regime": "high",
+              "timestamp": "2026-02-12T19:33:35.454322+00:00"
+            }
+          },
+          "enhanced_fields": {
+            "status": "ok",
+            "error": null,
+            "data": {
+              "iv_rank": 22.08,
+              "max_pain": 270.0,
+              "unusual_activity": [
+                {
+                  "strike": 287.5,
+                  "volume": 34,
+                  "open_interest": 1,
+                  "vol_oi_ratio": 34.0,
+                  "option_type": "put"
+                },
+                {
+                  "strike": 277.5,
+                  "volume": 18225,
+                  "open_interest": 1870,
+                  "vol_oi_ratio": 9.75,
+                  "option_type": "put"
+                },
+                {
+                  "strike": 275.0,
+                  "volume": 27621,
+                  "open_interest": 2937,
+                  "vol_oi_ratio": 9.4,
+                  "option_type": "put"
+                },
+                {
+                  "strike": 280.0,
+                  "volume": 6290,
+                  "open_interest": 1214,
+                  "vol_oi_ratio": 5.18,
+                  "option_type": "put"
+                },
+                {
+                  "strike": 272.5,
+                  "volume": 12095,
+                  "open_interest": 3346,
+                  "vol_oi_ratio": 3.61,
+                  "option_type": "put"
+                },
+                {
+                  "strike": 290.0,
+                  "volume": 18,
+                  "open_interest": 5,
+                  "vol_oi_ratio": 3.6,
+                  "option_type": "put"
+                },
+                {
+                  "strike": 277.5,
+                  "volume": 24436,
+                  "open_interest": 7721,
+                  "vol_oi_ratio": 3.16,
+                  "option_type": "call"
+                }
+              ],
+              "greeks_exposure": {
+                "delta": 37.2184,
+                "gamma": 0.9927,
+                "vega": 1.8256,
+                "theta": -41.1852
+              },
+              "spread_opportunities": [
+                {
+                  "buy_strike": 257.5,
+                  "sell_strike": 260.0,
+                  "spread_width": 2.5,
+                  "max_cost": 0.02,
+                  "max_profit": 2.48,
+                  "option_type": "put"
+                },
+                {
+                  "buy_strike": 260.0,
+                  "sell_strike": 262.5,
+                  "spread_width": 2.5,
+                  "max_cost": 0.03,
+                  "max_profit": 2.47,
+                  "option_type": "put"
+                },
+                {
+                  "buy_strike": 257.5,
+                  "sell_strike": 262.5,
+                  "spread_width": 5.0,
+                  "max_cost": 0.07,
+                  "max_profit": 4.93,
+                  "option_type": "put"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "POST /api/options-ai": {
+      "status_code": 200,
+      "elapsed_seconds": 8.86,
+      "response": {
+        "success": true,
+        "data": {
+          "symbol": "AAPL",
+          "timestamp": "2026-02-12T19:33:36.747131",
+          "current_price": 261.79,
+          "expiration_date": "2026-02-13",
+          "days_to_expiration": 0,
+          "available_expirations": [
+            "2026-02-13",
+            "2026-02-18",
+            "2026-02-20",
+            "2026-02-23",
+            "2026-02-25",
+            "2026-02-27",
+            "2026-03-06",
+            "2026-03-13",
+            "2026-03-20",
+            "2026-03-27"
+          ],
+          "calls": {
+            "total_contracts": 58,
+            "liquid_contracts": 18,
+            "total_volume": 291795,
+            "total_open_interest": 142492,
+            "avg_implied_volatility": 112.45703065648571,
+            "max_iv": 560.5471743164062,
+            "min_iv": 30.86006640625,
+            "atm_strike": 262.5,
+            "atm_iv": 32.813171874999995,
+            "atm_delta": null,
+            "top_volume_strikes": [
+              {
+                "strike": 275.0,
+                "volume": 49164,
+                "iv": 34.4733115234375
+              },
+              {
+                "strike": 270.0,
+                "volume": 38872,
+                "iv": 31.250687499999998
+              },
+              {
+                "strike": 265.0,
+                "volume": 35300,
+                "iv": 31.17744604492187
+              },
+              {
+                "strike": 272.5,
+                "volume": 33332,
+                "iv": 33.1061376953125
+              },
+              {
+                "strike": 277.5,
+                "volume": 30212,
+                "iv": 37.695935546875
+              }
+            ],
+            "top_oi_strikes": [
+              {
+                "strike": 280.0,
+                "open_interest": 27737,
+                "iv": 39.8443515625
+              },
+              {
+                "strike": 285.0,
+                "open_interest": 22144,
+                "iv": 46.0942890625
+              },
+              {
+                "strike": 290.0,
+                "open_interest": 17399,
+                "iv": 50.7817421875
+              },
+              {
+                "strike": 282.5,
+                "open_interest": 10024,
+                "iv": 42.188078125
+              },
+              {
+                "strike": 275.0,
+                "open_interest": 8514,
+                "iv": 34.4733115234375
+              }
+            ]
+          },
+          "puts": {
+            "total_contracts": 54,
+            "liquid_contracts": 25,
+            "total_volume": 228155,
+            "total_open_interest": 105591,
+            "avg_implied_volatility": 95.94859116843897,
+            "max_iv": 275.0003125,
+            "min_iv": 0.0010000000000000002,
+            "atm_strike": 262.5,
+            "atm_iv": 28.760478027343737,
+            "atm_delta": null,
+            "top_volume_strikes": [
+              {
+                "strike": 260.0,
+                "volume": 53264,
+                "iv": 30.737997314453118
+              },
+              {
+                "strike": 270.0,
+                "volume": 42953,
+                "iv": 21.289849609375
+              },
+              {
+                "strike": 267.5,
+                "volume": 24803,
+                "iv": 24.9030947265625
+              },
+              {
+                "strike": 265.0,
+                "volume": 24690,
+                "iv": 26.465579101562497
+              },
+              {
+                "strike": 272.5,
+                "volume": 19691,
+                "iv": 35.352208984375
+              }
+            ],
+            "top_oi_strikes": [
+              {
+                "strike": 260.0,
+                "open_interest": 10751,
+                "iv": 30.737997314453118
+              },
+              {
+                "strike": 275.0,
+                "open_interest": 7596,
+                "iv": 53.36960693359375
+              },
+              {
+                "strike": 270.0,
+                "open_interest": 6347,
+                "iv": 21.289849609375
+              },
+              {
+                "strike": 265.0,
+                "open_interest": 6204,
+                "iv": 26.465579101562497
+              },
+              {
+                "strike": 272.5,
+                "open_interest": 5416,
+                "iv": 35.352208984375
+              }
+            ]
+          },
+          "put_call_ratio": {
+            "volume": 0.7819016775475933,
+            "open_interest": 0.741031075428796
+          },
+          "risk_warnings": [
+            "High implied volatility (112.5%) - options are expensive, consider selling strategies or spreads",
+            "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+          ],
+          "opportunities": [],
+          "liquidity_threshold": 75,
+          "ai_analysis": {
+            "market_sentiment": {
+              "bias": "NEUTRAL",
+              "confidence": "LOW",
+              "reasoning": "The put/call volume ratio of 0.78 suggests slightly more calls than puts were traded, hinting at a mildly bullish sentiment, but with today's expiration, this could be due to closing positions rather than directional bets. The ATM IV for puts (28.8%) being lower than calls (32.8%) also suggests a very slightly bullish view, but the overwhelming factor is the very short DTE."
+            },
+            "iv_analysis": {
+              "level": "EXTREMELY HIGH",
+              "buyer_vs_seller_edge": "Strong seller edge due to inflated implied volatility driven by the very short time to expiration. The high IV suggests significant uncertainty and potentially high expected price swings in a very short period."
+            },
+            "strategy_recommendations": [
+              {
+                "strategy_name": "Short Straddle",
+                "bias": "NEUTRAL",
+                "strikes": "Sell ATM call and ATM put (approximately $262 strike)",
+                "reasoning": "Capitalize on the high implied volatility and rapid theta decay. Profitable if AAPL stays within a relatively narrow range around the current price by expiration. Given the extremely short timeframe, this is highly risky but could be extremely profitable if the price doesn't move much.",
+                "suitability": "AGGRESSIVE"
+              },
+              {
+                "strategy_name": "Short Strangle",
+                "bias": "NEUTRAL",
+                "strikes": "Sell OTM call and OTM put. e.g. Sell $265 call and $258 put.",
+                "reasoning": "Similar to a short straddle, but with wider break-even points, offering slightly more buffer for small price movements. Still benefits from high IV and theta decay. Less risky than a short straddle, but offers lower potential profit.",
+                "suitability": "MODERATE"
+              },
+              {
+                "strategy_name": "Calendar Spread (Avoid if possible)",
+                "bias": "NEUTRAL",
+                "strikes": "Buy a longer dated option (e.g. next week) and sell the current expiring option (call or put).",
+                "reasoning": "Ideally, you would want to take advantage of the high IV in the current expiration, but there are no options left. This strategy is very risky as theta is not necessarily your friend due to the front-month contract already expiring. The longer-dated contract needs to make a significant move in either direction, or it may be a loss. This strategy is only recommended if you have a strong directional bias.",
+                "suitability": "AGGRESSIVE"
+              }
+            ],
+            "risk_factors": [
+              {
+                "factor": "High Theta Decay",
+                "severity": "HIGH",
+                "mitigation": "Requires very rapid price movement to be profitable. Monitor the position constantly and be prepared to close quickly if the price moves against you."
+              },
+              {
+                "factor": "High Implied Volatility",
+                "severity": "HIGH",
+                "mitigation": "Selling options is risky if IV expands further. Consider using defined risk strategies. If buying, understand premium erosion due to IV crush after news event."
+              },
+              {
+                "factor": "Pin Risk",
+                "severity": "MEDIUM",
+                "mitigation": "If short strikes are near the closing price, there is a risk of assignment. Close the position prior to expiration or be prepared to buy/sell the underlying stock."
+              }
+            ],
+            "position_sizing": {
+              "recommended_allocation": "Very small allocation (1-2% of portfolio)",
+              "max_risk_per_trade": "Limit maximum loss to 1% of portfolio"
+            },
+            "action_plan": [
+              {
+                "step": 1,
+                "action": "Analyze the underlying asset's chart for support and resistance levels.",
+                "timing": "Immediately"
+              },
+              {
+                "step": 2,
+                "action": "Select the option strategy based on risk tolerance and directional view.",
+                "timing": "Immediately"
+              },
+              {
+                "step": 3,
+                "action": "Carefully select strike prices, considering the limited time to expiration and potential for pin risk.",
+                "timing": "Immediately"
+              },
+              {
+                "step": 4,
+                "action": "Monitor the position continuously, as theta decay will be rapid.",
+                "timing": "Ongoing"
+              },
+              {
+                "step": 5,
+                "action": "Close the position well before expiration to avoid unexpected assignment or exercise.",
+                "timing": "Within the day"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "POST /api/pipeline/run-single": {
+      "status_code": 200,
+      "elapsed_seconds": 17.84,
+      "response": {
+        "success": true,
+        "data": {
+          "symbol": "MSFT",
+          "options_chain": {
+            "status": "ok",
+            "expirations": 25,
+            "total_calls": 1963,
+            "total_puts": 1963,
+            "last_trade_price": 404.37,
+            "docs_written": 4
+          },
+          "quote": {
+            "status": "ok",
+            "current": 405.65,
+            "change_percent": 0.3165
+          },
+          "candles": {
+            "1min": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            },
+            "5min": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            },
+            "15min": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            },
+            "30min": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            },
+            "1hour": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            },
+            "1day": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            },
+            "1week": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            },
+            "1month": {
+              "status": "unavailable",
+              "source": "none",
+              "num_candles": 0,
+              "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+            }
+          }
+        }
+      }
+    },
+    "POST /api/pipeline/run": {
+      "status_code": 200,
+      "elapsed_seconds": 17.86,
+      "response": {
+        "success": true,
+        "data": {
+          "status": "completed",
+          "started_at": "2026-02-12T19:34:03.357591+00:00",
+          "completed_at": "2026-02-12T19:34:20.719342+00:00",
+          "elapsed_seconds": 17.36,
+          "symbols_processed": 1,
+          "symbols": [
+            "NVDA"
+          ],
+          "results": {
+            "NVDA": {
+              "symbol": "NVDA",
+              "options_chain": {
+                "status": "ok",
+                "expirations": 25,
+                "total_calls": 2086,
+                "total_puts": 2086,
+                "last_trade_price": 190.05,
+                "docs_written": 4
+              },
+              "quote": {
+                "status": "ok",
+                "current": 189.41,
+                "change_percent": -0.3368
+              },
+              "candles": {
+                "1min": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                },
+                "5min": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                },
+                "15min": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                },
+                "30min": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                },
+                "1hour": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                },
+                "1day": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                },
+                "1week": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                },
+                "1month": {
+                  "status": "unavailable",
+                  "source": "none",
+                  "num_candles": 0,
+                  "error": "Neither Finnhub nor Alpha Vantage returned data for this interval. Intraday data requires paid plans on both services."
+                }
+              }
+            }
+          },
+          "created_at": "2026-02-12T19:34:20.719388+00:00",
+          "run_id": "o38Jm2q1I6NWt5oX9PUd"
+        }
+      }
+    }
+  },
+  "summary": {
+    "total_endpoints": 12,
+    "passed": 12,
+    "failed": 0,
+    "pass_rate": "12/12"
+  }
+}

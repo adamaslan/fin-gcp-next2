@@ -2,7 +2,7 @@
 name: code-review
 description: Review code for quality, security, performance, and best practices in MCP Finance app. Use when reviewing code, pull requests, diffs, or when user mentions code review, PR review, or asks to check code quality.
 allowed-tools: Read, Grep, Glob, Bash(git *)
----
+--- ww
 
 # Code Review Skill
 

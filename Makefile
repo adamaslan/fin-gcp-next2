@@ -183,5 +183,70 @@ all-checks: verify-env test-python check-firestore ## Run all verification check
 	@echo "$(GREEN)═══════════════════════════════════════════════════$(NC)"
 	@echo ""
 
+# ============================================================================
+# Security Scanning Commands
+# ============================================================================
+
+.PHONY: security-scan-quick
+security-scan-quick: ## Quick security scan of staged files only
+	@echo "$(BLUE)Running quick security scan (staged files)...$(NC)"
+	@echo ""
+	@echo "$(YELLOW)Checking for sensitive patterns in staged files...$(NC)"
+	@/sensitive-data-scan --quick 2>&1 || echo "$(RED)Security issues found. See above for details.$(NC)"
+
+.PHONY: security-scan-full
+security-scan-full: ## Full security scan of entire repository
+	@echo "$(BLUE)Running full security scan...$(NC)"
+	@echo ""
+	@/sensitive-data-scan --full --output=security-audit-$(shell date +%Y-%m-%d).md
+	@echo "$(GREEN)✓$(NC) Full scan complete: security-audit-$(shell date +%Y-%m-%d).md"
+	@echo ""
+	@echo "Review the report for findings and remediation steps."
+
+.PHONY: security-verify-file
+security-verify-file: ## Verify specific file for sensitive data
+	@if [ -z "$(FILE)" ]; then \
+		echo "$(RED)Error: FILE variable required$(NC)"; \
+		echo "Usage: make security-verify-file FILE=path/to/file.md"; \
+		exit 1; \
+	fi
+	@echo "$(BLUE)Verifying $(FILE) for sensitive data...$(NC)"
+	@echo ""
+	@/sensitive-data-scan --verify=$(FILE)
+
+.PHONY: security-hook-install
+security-hook-install: ## Install pre-commit security hook
+	@echo "$(BLUE)Installing pre-commit security hook...$(NC)"
+	@echo ""
+	@/sensitive-data-scan --install-hook
+	@echo "$(GREEN)✓$(NC) Pre-commit hook installed"
+	@echo "$(YELLOW)Security scan will run automatically on next commit$(NC)"
+
+.PHONY: security-hook-remove
+security-hook-remove: ## Remove pre-commit security hook
+	@echo "$(BLUE)Removing pre-commit security hook...$(NC)"
+	@echo ""
+	@/sensitive-data-scan --remove-hook || rm -f .git/hooks/pre-commit
+	@echo "$(GREEN)✓$(NC) Pre-commit hook removed"
+
+.PHONY: security-doc-create
+security-doc-create: ## Create safe documentation (interactive)
+	@if [ -z "$(INPUT)" ]; then \
+		echo "$(RED)Error: INPUT variable required$(NC)"; \
+		echo "Usage: make security-doc-create INPUT=path/to/source OUTPUT=path/to/output.md"; \
+		exit 1; \
+	fi
+	@if [ -z "$(OUTPUT)" ]; then \
+		echo "$(RED)Error: OUTPUT variable required$(NC)"; \
+		echo "Usage: make security-doc-create INPUT=path/to/source OUTPUT=path/to/output.md"; \
+		exit 1; \
+	fi
+	@echo "$(BLUE)Creating safe documentation...$(NC)"
+	@echo "Input:  $(INPUT)"
+	@echo "Output: $(OUTPUT)"
+	@echo ""
+	@/sensitive-doc-creator --input=$(INPUT) --output=$(OUTPUT) --interactive
+	@echo "$(GREEN)✓$(NC) Safe documentation created: $(OUTPUT)"
+
 # Default target
 .DEFAULT_GOAL := help

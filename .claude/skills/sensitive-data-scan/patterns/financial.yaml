@@ -1,0 +1,320 @@
+# Financial Data Pattern Database
+# For use with sensitive-data-scan skill
+# Financial information is context-sensitive; test data may be INFO, real data is CRITICAL
+
+patterns:
+  stripe_account_id:
+    name: "Stripe Account ID"
+    regex: '\bacct_[A-Za-z0-9]{16,32}\b'
+    severity: WARNING
+    examples:
+      - "acct_1234567890abcdef"
+      - "acct_abcdefghijklmnopqrstuvwxyz123"
+    false_positives:
+      - "acct_[ID]"
+      - "[STRIPE_ACCOUNT]"
+    context:
+      - "Identifies Stripe merchant account"
+      - "Test vs production context matters"
+    remediation: "Verify if test or production"
+    risk: "Account identification; transaction linking"
+
+  stripe_payment_id:
+    name: "Stripe Payment ID"
+    regex: '\bpy_[A-Za-z0-9]{20,}\b'
+    severity: WARNING
+    examples:
+      - "py_1234567890abcdefghijk"
+    false_positives:
+      - "py_[ID]"
+      - "[PAYMENT_ID]"
+    context:
+      - "References specific transaction"
+      - "May indicate real customer transaction"
+    remediation: "Verify if test or real; redact real transactions"
+    risk: "Transaction identification"
+
+  stripe_invoice_id:
+    name: "Stripe Invoice ID"
+    regex: '\binv_[A-Za-z0-9]{20,}\b'
+    severity: WARNING
+    examples:
+      - "inv_1234567890abcdefghijk"
+    false_positives:
+      - "inv_[ID]"
+      - "[INVOICE_ID]"
+    context:
+      - "Invoice reference"
+      - "May contain customer financial data"
+    remediation: "Verify context; redact if real"
+    risk: "Transaction reference"
+
+  stripe_customer_id:
+    name: "Stripe Customer ID"
+    regex: '\bcus_[A-Za-z0-9]{20,}\b'
+    severity: WARNING
+    examples:
+      - "cus_1234567890abcdefghijk"
+    false_positives:
+      - "cus_[ID]"
+    context:
+      - "Customer identification in Stripe"
+      - "May identify real customer"
+    remediation: "Verify if test or real customer"
+    risk: "Customer identification"
+
+  bitcoin_address:
+    name: "Bitcoin Address (Potential)"
+    regex: '\b(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,62}\b'
+    severity: INFO
+    examples:
+      - "1A1z7agoat7SBvjMhYymDQzdBeP6qWfNaS"
+      - "3J98t1WpEZ73CNmYviecrnyiWrnqRhWNLy"
+      - "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4"
+    false_positives:
+      - "[ADDRESS]"
+    context:
+      - "Cryptocurrency address"
+      - "Public information often"
+    remediation: "Not critical if publicly known; verify context"
+    risk: "May identify transaction recipient"
+
+  ethereum_address:
+    name: "Ethereum Address"
+    regex: '\b0x[a-fA-F0-9]{40}\b'
+    severity: INFO
+    examples:
+      - "0x1234567890123456789012345678901234567890"
+    false_positives:
+      - "0x[A-F0-9]{40}  # Example"
+      - "[ETH_ADDRESS]"
+      - "0x0 (common placeholder)"
+    context:
+      - "Ethereum wallet address"
+      - "May be public or private"
+    remediation: "Context-dependent; verify if real account"
+    risk: "Wallet identification"
+
+  transaction_reference:
+    name: "Transaction Reference/ID"
+    regex: '\b(transaction|tx|txn|trans_id|reference|ref)\s*[#=]?\s*([A-Za-z0-9]{16,32})\b'
+    severity: WARNING
+    examples:
+      - "transaction: abc123def456ghi789jkl012"
+      - "txn_id: 1234567890123456"
+    false_positives:
+      - "[TRANSACTION_ID]"
+      - "tx: [ID]"
+    context:
+      - "May identify real transaction"
+      - "Combination with timestamp reveals real data"
+    remediation: "Redact if real transaction"
+    risk: "Financial transaction identification"
+
+  invoice_number:
+    name: "Invoice Number"
+    regex: '\b(invoice|inv)\s*[#:]?\s*((?:INV|IF|#)?[\d\-A-Z]{5,15})\b'
+    severity: WARNING
+    examples:
+      - "invoice: INV-2025-001234"
+      - "inv #12345"
+    false_positives:
+      - "[INVOICE_NUMBER]"
+      - "invoice number format"
+    context:
+      - "Financial document reference"
+      - "May link to customer data"
+    remediation: "Redact if real invoice"
+    risk: "Financial document identification"
+
+  currency_amount:
+    name: "Currency Amount (Large Amounts - Potential Financial Data)"
+    regex: '\$\s*[\d,]{5,}(?:\.\d{2})?|\d+(?:,\d{3})*\.\d{2}\s*(?:USD|EUR|GBP|JPY)'
+    severity: INFO
+    examples:
+      - "$1,234,567.89"
+      - "5,000,000.00 USD"
+    false_positives:
+      - "[AMOUNT]"
+      - "Example prices"
+    context:
+      - "Test amounts usually not critical"
+      - "Combined with customer data is WARNING"
+    remediation: "Verify context; redact if real customer financial"
+    risk: "Financial amount; may indicate real transaction"
+
+  account_balance:
+    name: "Account Balance Reference"
+    regex: '\b(balance|account balance|current balance)\s*[=:]\s*\$?[\d,]{3,}(?:\.\d{2})?\b'
+    severity: WARNING
+    examples:
+      - "account balance = $123,456.78"
+      - "balance: 50000"
+    false_positives:
+      - "balance: [AMOUNT]"
+      - "balance: 0"
+    context:
+      - "Financial position information"
+      - "Real customer account data"
+    remediation: "Redact if real customer data"
+    risk: "Account financial information"
+
+  payment_method:
+    name: "Payment Method with Card Details"
+    regex: '\b(card|payment method)\s*[=:]?\s*(visa|mastercard|amex|american express|discover|diners|jcb)\b'
+    severity: WARNING
+    examples:
+      - "card: Visa ending in 4567"
+      - "payment method = MasterCard"
+    false_positives:
+      - "card: [TYPE]"
+    context:
+      - "Customer payment information"
+    remediation: "Verify if test; redact if real"
+    risk: "Payment method association"
+
+  iban_code:
+    name: "International Bank Account Number (IBAN)"
+    regex: '\b(?:[A-Z]{2}[ ]?\d{2})(?:[ ]?[A-Z0-9]){1,30}\b'
+    severity: CRITICAL
+    examples:
+      - "DE89370400440532013000"
+      - "GB82WEST12345698765432"
+      - "FR1420041010050500013M02606"
+    false_positives:
+      - "[IBAN]"
+    context:
+      - "International bank account"
+      - "Highly sensitive"
+    remediation: "Remove immediately"
+    risk: "Bank account direct identification"
+
+  swift_code:
+    name: "SWIFT/BIC Code"
+    regex: '\b[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}(?:[A-Z0-9]{3})?\b(?=\s*swift|\s*bic)'
+    severity: WARNING
+    examples:
+      - "DEUT DE 89"
+      - "CHASE US 33"
+    false_positives:
+      - "[SWIFT_CODE]"
+    context:
+      - "Bank routing information"
+    remediation: "Redact if real bank setup"
+    risk: "Bank identification"
+
+  wire_transfer_details:
+    name: "Wire Transfer Instructions"
+    regex: 'wire.*?(to|recipient|account|routing|amount|date)[\s\n]+'
+    severity: CRITICAL
+    examples:
+      - "Wire transfer to account 12345678 routing 987654321"
+    false_positives:
+      - "[DETAILS]"
+    context:
+      - "Financial transaction instructions"
+      - "Critical data"
+    remediation: "Remove completely"
+    risk: "Complete financial transaction setup"
+
+  salary_information:
+    name: "Salary/Compensation Information"
+    regex: '\b(salary|compensation|bonus|payment|hourly rate)\s*[=:]\s*\$?[\d,]+'
+    severity: WARNING
+    examples:
+      - "salary: $125,000"
+      - "hourly rate = $50"
+    false_positives:
+      - "salary: [AMOUNT]"
+    context:
+      - "Employee information"
+      - "Sensitive HR data"
+    remediation: "Redact if real employee data"
+    risk: "Compensation information"
+
+  contract_value:
+    name: "Contract Value"
+    regex: '\b(contract|deal|engagement|service) (?:value|amount|price)\s*[=:]\s*\$?[\d,]{5,}\b'
+    severity: WARNING
+    examples:
+      - "contract value: $500,000"
+      - "deal amount = $1.5M"
+    false_positives:
+      - "[VALUE]"
+    context:
+      - "Business transaction value"
+      - "Confidential deal information"
+    remediation: "Redact if confidential"
+    risk: "Business intelligence"
+
+  subscription_plan:
+    name: "Subscription Plan with Pricing"
+    regex: '\b(plan|tier|subscription)\s*[=:]\s*(basic|standard|pro|premium|enterprise)\s*.*?\$[\d,]+'
+    severity: INFO
+    examples:
+      - "plan: Pro - $99/month"
+    false_positives:
+      - "plan: [TYPE]"
+    context:
+      - "Public pricing usually"
+      - "Customer subscription is WARNING"
+    remediation: "Verify if public or customer data"
+    risk: "Plan identification"
+
+  credit_limit:
+    name: "Credit Limit"
+    regex: '\b(credit limit|credit line|line of credit)\s*[=:]\s*\$?[\d,]{4,}\b'
+    severity: CRITICAL
+    examples:
+      - "credit limit = $50,000"
+    false_positives:
+      - "credit limit: [AMOUNT]"
+    context:
+      - "Customer financial capability"
+      - "Highly sensitive"
+    remediation: "Remove immediately"
+    risk: "Customer financial capability exposure"
+
+  interest_rate:
+    name: "Interest Rate"
+    regex: '\b(interest rate|apr|apy|rate)\s*[=:]\s*[\d.]{2,4}\s*%'
+    severity: INFO
+    examples:
+      - "interest rate: 4.25%"
+      - "APR = 3.99%"
+    false_positives:
+      - "[RATE]"
+    context:
+      - "May be public or customer-specific"
+    remediation: "Verify context"
+    risk: "Usually not critical"
+
+  loan_amount:
+    name: "Loan Amount"
+    regex: '\b(loan|mortgage|credit)\s*(?:amount|principal)\s*[=:]\s*\$?[\d,]{5,}\b'
+    severity: CRITICAL
+    examples:
+      - "loan amount: $350,000"
+      - "mortgage principal = $500,000"
+    false_positives:
+      - "[AMOUNT]"
+    context:
+      - "Customer debt information"
+      - "Highly sensitive"
+    remediation: "Remove immediately"
+    risk: "Customer financial obligation"
+
+  stock_symbol_with_price:
+    name: "Stock Symbol with Price"
+    regex: '\b([A-Z]{1,5})\s+.*?(?:price|trading at|at)\s*\$?[\d.]{3,}\b'
+    severity: INFO
+    examples:
+      - "AAPL trading at $150.25"
+      - "TSLA price: $250"
+    false_positives:
+      - "[SYMBOL] at [PRICE]"
+    context:
+      - "Usually public market data"
+    remediation: "Generally safe; verify context"
+    risk: "Usually public information"
+

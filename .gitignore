@@ -31,3 +31,146 @@ SECURITY_AUDIT_*.md
 *_audit_report.md
 *.vulnerability_report
 security_notes.txt
+
+# ============================================================================
+# Security: Sensitive Documentation & Test Results with Exposed Credentials
+# ============================================================================
+
+# Quarantined sensitive files (real GCP project IDs, emails, service URLs)
+**/soosensitive/
+
+# Firestore docs with real project IDs and email addresses
+FIRESTORE_*.md
+GCP_SERVICES_USAGE.md
+PIPELINE_OPTIMIZATION_SUMMARY.md
+ENVIRONMENT_TEST_REPORT.md
+SCRIPT_EXECUTION_REPORT.md
+EXECUTION_METHODS_SUMMARY.md
+BACKEND_IMPLEMENTATION_COMPLETE.md
+FILE_REORGANIZATION_PLAN.md
+GUIDE.md
+GUIDE-ENHANCED.md
+
+# Test scripts with real Cloud Run URLs or project IDs
+gcloud_mcp_test.py
+
+# Skill files with example API key patterns (triggers GitHub secret scanning)
+.claude/skills/sensitive-data-scan/patterns/
+.claude/skills/sensitive-data-scan/SKILL.md
+.claude/skills/sensitive-doc-creator/templates/redaction-guide.md
+
+# Backend execution reports (may contain exposed API keys)
+nu-docs/BACKEND_EXECUTION_REPORT.md
+nu-docs/BACKEND_EXECUTION_RUNBOOK.md
+nu-docs/*_EXECUTION_*.md
+nu-docs/GCLOUD_MCP_STATUS.md
+
+# Backend test results (contain real API responses)
+backend_test_results/
+logs/
+nu-logs/
+
+# Safe to keep for documentation (explicitly allowed)
+!backend_test_results/*/SAFE_REPORT.md
+!backend_test_results/*/analysis.md
+
+# ============================================================================
+# Security: Local Configuration with Credentials
+# ============================================================================
+
+# Local configuration files (contain credentials, not version controlled)
+.claude/*.local.json
+*.local.json
+
+# Service account keys and credentials
+*-service-account.json
+*credentials*.json
+*.key
+*.pem
+service-account.json
+
+# ============================================================================
+# Security: API & Configuration Files with Secrets
+# ============================================================================
+
+# Firebase configuration (may contain secrets)
+firebase-config.json
+*firebase*.json
+
+# API configuration files
+*api*.json
+*config*.json
+
+# Database configuration (non-.env)
+database.json
+db.json
+
+# AWS configuration
+.aws/
+aws-config.json
+
+# GCP configuration
+gcp-config.json
+.gcp/
+
+# ============================================================================
+# Python & Development Security
+# ============================================================================
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Poetry/Pipenv lock files (consider committing these, but document carefully)
+poetry.lock
+Pipfile.lock
+
+# IDE generated files that might contain credentials
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ============================================================================
+# Testing & Build Artifacts
+# ============================================================================
+
+# Test coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Temporary test files
+test_*.txt
+temp_*.json
+tmp/
+.tmp/
+
+# Local overview docs (generated summaries; not tracked)
+overview/
+
+# ============================================================================
+# OS-Specific Files
+# ============================================================================
+
+.DS_Store
+Thumbs.db
+.env.local.bak
+*.orig
