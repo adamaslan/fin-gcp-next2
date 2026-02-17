@@ -1,0 +1,1130 @@
+{
+  "AEM": {
+    "comparison_rank": {
+      "data": {
+        "liquid_contracts": 8,
+        "total_volume": 3117,
+        "put_call_ratio": 2.9808429118773945,
+        "atm_iv": 70.08
+      },
+      "status": "ok",
+      "error": null
+    },
+    "current_price": 215.5,
+    "vehicle_recommendation": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:07.320248+00:00",
+        "spread_width_info": "Width typically 1x ATR equivalent for 3.0% expected move",
+        "vehicle": "option_spread",
+        "volatility_regime": "high",
+        "delta_range": [
+          0.4,
+          0.6
+        ],
+        "reasoning": "High volatility suitable for spreads; consider bull call spread for defined risk",
+        "spread_type": "Bull Call Spread",
+        "expected_move_percent": 3.0,
+        "symbol": "AEM",
+        "dte_range": [
+          30,
+          45
+        ]
+      },
+      "status": "ok",
+      "error": null
+    },
+    "data_source": "firestore_finnhub",
+    "risk_analysis": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:06.599120+00:00",
+        "opportunities": [],
+        "symbol": "AEM",
+        "current_price": 215.5,
+        "risk_warnings": [
+          "High implied volatility (130.7%) - options are expensive, consider selling strategies or spreads",
+          "High Put/Call Volume Ratio (2.98) - bearish sentiment, heavy put buying",
+          "Low liquidity in calls (2 liquid contracts) - wide bid-ask spreads likely",
+          "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+        ],
+        "calls": {
+          "atm_delta": 0.2892,
+          "total_volume": 783,
+          "atm_iv": 70.08,
+          "total_contracts": 74,
+          "liquid_contracts": 2,
+          "max_iv": 321.64,
+          "total_open_interest": 4602,
+          "atm_strike": 220.0,
+          "avg_implied_volatility": 130.66608108108107,
+          "top_volume_strikes": [
+            {
+              "strike": 220.0,
+              "iv": 70.08,
+              "volume": 264
+            },
+            {
+              "strike": 222.5,
+              "iv": 71.08,
+              "volume": 153
+            }
+          ],
+          "min_iv": 0.0,
+          "top_oi_strikes": [
+            {
+              "strike": 222.5,
+              "iv": 71.08,
+              "open_interest": 1058
+            },
+            {
+              "strike": 220.0,
+              "iv": 70.08,
+              "open_interest": 488
+            }
+          ]
+        },
+        "expiration_date": "2026-02-13",
+        "put_call_ratio": {
+          "volume": 2.9808429118773945,
+          "open_interest": 0.5047805302042591
+        },
+        "days_to_expiration": 0,
+        "available_expirations": [
+          "2026-02-13",
+          "2026-02-20",
+          "2026-02-27",
+          "2026-03-06",
+          "2026-03-13",
+          "2026-03-20",
+          "2026-03-27",
+          "2026-04-17",
+          "2026-05-15",
+          "2026-06-18",
+          "2026-07-17",
+          "2026-08-21",
+          "2026-09-18",
+          "2026-10-16",
+          "2026-11-20",
+          "2026-12-18",
+          "2027-01-15",
+          "2027-02-19",
+          "2027-06-17",
+          "2028-01-21"
+        ],
+        "puts": {
+          "atm_delta": -0.5869,
+          "total_volume": 2334,
+          "atm_iv": 63.83,
+          "total_contracts": 74,
+          "liquid_contracts": 6,
+          "max_iv": 588.93,
+          "total_open_interest": 2323,
+          "atm_strike": 215.0,
+          "avg_implied_volatility": 125.36540540540541,
+          "top_volume_strikes": [
+            {
+              "strike": 200.0,
+              "iv": 72.42,
+              "volume": 1593
+            },
+            {
+              "strike": 195.0,
+              "iv": 73.65,
+              "volume": 216
+            },
+            {
+              "strike": 190.0,
+              "iv": 72.82,
+              "volume": 140
+            },
+            {
+              "strike": 210.0,
+              "iv": 66.99,
+              "volume": 105
+            },
+            {
+              "strike": 182.5,
+              "iv": 84.93,
+              "volume": 78
+            }
+          ],
+          "min_iv": 0.0,
+          "top_oi_strikes": [
+            {
+              "strike": 190.0,
+              "iv": 72.82,
+              "open_interest": 313
+            },
+            {
+              "strike": 200.0,
+              "iv": 72.42,
+              "open_interest": 305
+            },
+            {
+              "strike": 195.0,
+              "iv": 73.65,
+              "open_interest": 294
+            },
+            {
+              "strike": 182.5,
+              "iv": 84.93,
+              "open_interest": 172
+            },
+            {
+              "strike": 210.0,
+              "iv": 66.99,
+              "open_interest": 61
+            }
+          ]
+        },
+        "liquidity_threshold": 75
+      },
+      "status": "ok",
+      "error": null
+    },
+    "summary": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:07.155135+00:00",
+        "total_call_volume": 783,
+        "current_price": 215.5,
+        "risk_level": "high",
+        "sentiment": "bearish",
+        "put_call_ratio_volume": 2.9808429118773945,
+        "atm_put_iv": 63.83,
+        "atm_call_iv": 70.08,
+        "days_to_expiration": 0,
+        "nearest_expiration": "2026-02-13",
+        "total_put_volume": 2334,
+        "symbol": "AEM"
+      },
+      "status": "ok",
+      "error": null
+    },
+    "analysis_version": "1.0",
+    "analyzed_at": "2026-02-12T05:15:05.910784+00:00",
+    "run_id": "analysis_20260212_051505",
+    "symbol": "AEM"
+  },
+  "CRM": {
+    "comparison_rank": {
+      "data": {
+        "liquid_contracts": 29,
+        "total_volume": 17219,
+        "put_call_ratio": 0.7378885748889786,
+        "atm_iv": 54.44
+      },
+      "status": "ok",
+      "error": null
+    },
+    "current_price": 185.23,
+    "vehicle_recommendation": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:08.877637+00:00",
+        "spread_width_info": "Width typically 1x ATR equivalent for 3.0% expected move",
+        "vehicle": "option_spread",
+        "volatility_regime": "high",
+        "delta_range": [
+          0.4,
+          0.6
+        ],
+        "reasoning": "High volatility suitable for spreads; consider bull call spread for defined risk",
+        "spread_type": "Bull Call Spread",
+        "expected_move_percent": 3.0,
+        "symbol": "CRM",
+        "dte_range": [
+          30,
+          45
+        ]
+      },
+      "status": "ok",
+      "error": null
+    },
+    "data_source": "firestore_finnhub",
+    "risk_analysis": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:08.214563+00:00",
+        "opportunities": [],
+        "symbol": "CRM",
+        "current_price": 185.23,
+        "risk_warnings": [
+          "High implied volatility (130.3%) - options are expensive, consider selling strategies or spreads",
+          "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+        ],
+        "calls": {
+          "atm_delta": 0.6531,
+          "total_volume": 9908,
+          "atm_iv": 54.44,
+          "total_contracts": 64,
+          "liquid_contracts": 16,
+          "max_iv": 305.94,
+          "total_open_interest": 17143,
+          "atm_strike": 190.0,
+          "avg_implied_volatility": 130.27328125,
+          "top_volume_strikes": [
+            {
+              "strike": 200.0,
+              "iv": 53.05,
+              "volume": 2755
+            },
+            {
+              "strike": 205.0,
+              "iv": 55.11000000000001,
+              "volume": 1502
+            },
+            {
+              "strike": 210.0,
+              "iv": 58.34,
+              "volume": 849
+            },
+            {
+              "strike": 195.0,
+              "iv": 53.32,
+              "volume": 731
+            },
+            {
+              "strike": 190.0,
+              "iv": 54.44,
+              "volume": 723
+            }
+          ],
+          "min_iv": 0.0,
+          "top_oi_strikes": [
+            {
+              "strike": 200.0,
+              "iv": 53.05,
+              "open_interest": 1683
+            },
+            {
+              "strike": 215.0,
+              "iv": 64.55,
+              "open_interest": 1323
+            },
+            {
+              "strike": 195.0,
+              "iv": 53.32,
+              "open_interest": 1213
+            },
+            {
+              "strike": 205.0,
+              "iv": 55.11000000000001,
+              "open_interest": 1079
+            },
+            {
+              "strike": 202.5,
+              "iv": 53.53,
+              "open_interest": 941
+            }
+          ]
+        },
+        "expiration_date": "2026-02-13",
+        "put_call_ratio": {
+          "volume": 0.7378885748889786,
+          "open_interest": 1.2848392930058916
+        },
+        "days_to_expiration": 0,
+        "available_expirations": [
+          "2026-02-13",
+          "2026-02-20",
+          "2026-02-27",
+          "2026-03-06",
+          "2026-03-13",
+          "2026-03-20",
+          "2026-03-27",
+          "2026-04-17",
+          "2026-05-15",
+          "2026-06-18",
+          "2026-08-21",
+          "2026-09-18",
+          "2026-12-18",
+          "2027-01-15",
+          "2027-06-17",
+          "2027-09-17",
+          "2027-12-17",
+          "2028-01-21"
+        ],
+        "puts": {
+          "atm_delta": -0.1914,
+          "total_volume": 7311,
+          "atm_iv": 58.48,
+          "total_contracts": 64,
+          "liquid_contracts": 13,
+          "max_iv": 222.23999999999998,
+          "total_open_interest": 22026,
+          "atm_strike": 185.0,
+          "avg_implied_volatility": 47.26015625,
+          "top_volume_strikes": [
+            {
+              "strike": 192.5,
+              "iv": 53.73,
+              "volume": 1583
+            },
+            {
+              "strike": 185.0,
+              "iv": 58.48,
+              "volume": 1507
+            },
+            {
+              "strike": 187.5,
+              "iv": 55.84,
+              "volume": 906
+            },
+            {
+              "strike": 190.0,
+              "iv": 54.39000000000001,
+              "volume": 580
+            },
+            {
+              "strike": 167.5,
+              "iv": 80.63,
+              "volume": 521
+            }
+          ],
+          "min_iv": 0.0,
+          "top_oi_strikes": [
+            {
+              "strike": 185.0,
+              "iv": 58.48,
+              "open_interest": 3432
+            },
+            {
+              "strike": 180.0,
+              "iv": 64.24,
+              "open_interest": 2604
+            },
+            {
+              "strike": 187.5,
+              "iv": 55.84,
+              "open_interest": 2385
+            },
+            {
+              "strike": 167.5,
+              "iv": 80.63,
+              "open_interest": 2047
+            },
+            {
+              "strike": 175.0,
+              "iv": 69.86,
+              "open_interest": 1300
+            }
+          ]
+        },
+        "liquidity_threshold": 75
+      },
+      "status": "ok",
+      "error": null
+    },
+    "summary": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:08.617344+00:00",
+        "total_call_volume": 9908,
+        "current_price": 185.23,
+        "risk_level": "high",
+        "sentiment": "neutral",
+        "put_call_ratio_volume": 0.7378885748889786,
+        "atm_put_iv": 58.48,
+        "atm_call_iv": 54.44,
+        "days_to_expiration": 0,
+        "nearest_expiration": "2026-02-13",
+        "total_put_volume": 7311,
+        "symbol": "CRM"
+      },
+      "status": "ok",
+      "error": null
+    },
+    "analysis_version": "1.0",
+    "analyzed_at": "2026-02-12T05:15:05.910784+00:00",
+    "run_id": "analysis_20260212_051505",
+    "symbol": "CRM"
+  },
+  "IGV": {
+    "comparison_rank": {
+      "data": {
+        "liquid_contracts": 21,
+        "total_volume": 19717,
+        "put_call_ratio": 0.6921558530724339,
+        "atm_iv": 53.239999999999995
+      },
+      "status": "ok",
+      "error": null
+    },
+    "current_price": 83.24,
+    "vehicle_recommendation": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:09.879224+00:00",
+        "spread_width_info": "Width typically 1x ATR equivalent for 3.0% expected move",
+        "vehicle": "option_spread",
+        "volatility_regime": "high",
+        "delta_range": [
+          0.4,
+          0.6
+        ],
+        "reasoning": "High volatility suitable for spreads; consider bull call spread for defined risk",
+        "spread_type": "Bull Call Spread",
+        "expected_move_percent": 3.0,
+        "symbol": "IGV",
+        "dte_range": [
+          30,
+          45
+        ]
+      },
+      "status": "ok",
+      "error": null
+    },
+    "data_source": "firestore_finnhub",
+    "risk_analysis": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:09.376390+00:00",
+        "opportunities": [
+          "Low Put/Call Volume Ratio (0.69) - bullish sentiment, heavy call buying",
+          "Significant call skew (14.7pp) - upside positioning favored by options market"
+        ],
+        "symbol": "IGV",
+        "current_price": 83.24,
+        "risk_warnings": [
+          "High implied volatility (95.5%) - options are expensive, consider selling strategies or spreads",
+          "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+        ],
+        "calls": {
+          "atm_delta": 0.7334,
+          "total_volume": 11652,
+          "atm_iv": 53.239999999999995,
+          "total_contracts": 38,
+          "liquid_contracts": 12,
+          "max_iv": 357.03,
+          "total_open_interest": 12417,
+          "atm_strike": 83.0,
+          "avg_implied_volatility": 95.4621052631579,
+          "top_volume_strikes": [
+            {
+              "strike": 85.0,
+              "iv": 41.26,
+              "volume": 4013
+            },
+            {
+              "strike": 83.0,
+              "iv": 53.239999999999995,
+              "volume": 1933
+            },
+            {
+              "strike": 82.0,
+              "iv": 44.19,
+              "volume": 1516
+            },
+            {
+              "strike": 84.0,
+              "iv": 38.24,
+              "volume": 1109
+            },
+            {
+              "strike": 87.0,
+              "iv": 37.53,
+              "volume": 1005
+            }
+          ],
+          "min_iv": 34.09,
+          "top_oi_strikes": [
+            {
+              "strike": 85.0,
+              "iv": 41.26,
+              "open_interest": 3249
+            },
+            {
+              "strike": 83.0,
+              "iv": 53.239999999999995,
+              "open_interest": 2112
+            },
+            {
+              "strike": 84.0,
+              "iv": 38.24,
+              "open_interest": 2027
+            },
+            {
+              "strike": 82.0,
+              "iv": 44.19,
+              "open_interest": 1809
+            },
+            {
+              "strike": 87.0,
+              "iv": 37.53,
+              "open_interest": 1178
+            }
+          ]
+        },
+        "expiration_date": "2026-02-13",
+        "put_call_ratio": {
+          "volume": 0.6921558530724339,
+          "open_interest": 0.22823548361117824
+        },
+        "days_to_expiration": 0,
+        "available_expirations": [
+          "2026-02-13",
+          "2026-02-20",
+          "2026-02-27",
+          "2026-03-06",
+          "2026-03-13",
+          "2026-03-20",
+          "2026-03-27",
+          "2026-04-17",
+          "2026-05-15",
+          "2026-06-18",
+          "2026-08-21",
+          "2027-01-15",
+          "2027-03-19",
+          "2027-06-17",
+          "2027-07-16",
+          "2028-01-21"
+        ],
+        "puts": {
+          "atm_delta": -0.3081,
+          "total_volume": 8065,
+          "atm_iv": 38.53,
+          "total_contracts": 38,
+          "liquid_contracts": 9,
+          "max_iv": 429.4700000000001,
+          "total_open_interest": 2834,
+          "atm_strike": 84.0,
+          "avg_implied_volatility": 77.75842105263158,
+          "top_volume_strikes": [
+            {
+              "strike": 85.0,
+              "iv": 39.06,
+              "volume": 4002
+            },
+            {
+              "strike": 84.0,
+              "iv": 38.53,
+              "volume": 1765
+            },
+            {
+              "strike": 86.5,
+              "iv": 35.7,
+              "volume": 526
+            },
+            {
+              "strike": 80.0,
+              "iv": 44.19,
+              "volume": 389
+            },
+            {
+              "strike": 82.0,
+              "iv": 37.66,
+              "volume": 368
+            }
+          ],
+          "min_iv": 0.0,
+          "top_oi_strikes": [
+            {
+              "strike": 80.0,
+              "iv": 44.19,
+              "open_interest": 747
+            },
+            {
+              "strike": 85.0,
+              "iv": 39.06,
+              "open_interest": 437
+            },
+            {
+              "strike": 81.0,
+              "iv": 40.5,
+              "open_interest": 195
+            },
+            {
+              "strike": 82.0,
+              "iv": 37.66,
+              "open_interest": 151
+            },
+            {
+              "strike": 84.0,
+              "iv": 38.53,
+              "open_interest": 131
+            }
+          ]
+        },
+        "liquidity_threshold": 75
+      },
+      "status": "ok",
+      "error": null
+    },
+    "summary": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:09.688044+00:00",
+        "total_call_volume": 11652,
+        "current_price": 83.24,
+        "risk_level": "high",
+        "sentiment": "bullish",
+        "put_call_ratio_volume": 0.6921558530724339,
+        "atm_put_iv": 38.53,
+        "atm_call_iv": 53.239999999999995,
+        "days_to_expiration": 0,
+        "nearest_expiration": "2026-02-13",
+        "total_put_volume": 8065,
+        "symbol": "IGV"
+      },
+      "status": "ok",
+      "error": null
+    },
+    "analysis_version": "1.0",
+    "analyzed_at": "2026-02-12T05:15:05.910784+00:00",
+    "run_id": "analysis_20260212_051505",
+    "symbol": "IGV"
+  },
+  "JPM": {
+    "comparison_rank": {
+      "data": {
+        "liquid_contracts": 34,
+        "total_volume": 22543,
+        "put_call_ratio": 0.9612841482512615,
+        "atm_iv": 34.46
+      },
+      "status": "ok",
+      "error": null
+    },
+    "current_price": 311.38,
+    "vehicle_recommendation": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:10.923352+00:00",
+        "spread_width_info": "Width typically 1x ATR equivalent for 3.0% expected move",
+        "vehicle": "option_spread",
+        "volatility_regime": "high",
+        "delta_range": [
+          0.4,
+          0.6
+        ],
+        "reasoning": "High volatility suitable for spreads; consider bull call spread for defined risk",
+        "spread_type": "Bull Call Spread",
+        "expected_move_percent": 3.0,
+        "symbol": "JPM",
+        "dte_range": [
+          30,
+          45
+        ]
+      },
+      "status": "ok",
+      "error": null
+    },
+    "data_source": "firestore_finnhub",
+    "risk_analysis": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:10.415005+00:00",
+        "opportunities": [],
+        "symbol": "JPM",
+        "current_price": 311.38,
+        "risk_warnings": [
+          "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+        ],
+        "calls": {
+          "atm_delta": 0.7279,
+          "total_volume": 11494,
+          "atm_iv": 34.46,
+          "total_contracts": 63,
+          "liquid_contracts": 13,
+          "max_iv": 79.49,
+          "total_open_interest": 20505,
+          "atm_strike": 312.5,
+          "avg_implied_volatility": 23.437936507936506,
+          "top_volume_strikes": [
+            {
+              "strike": 325.0,
+              "iv": 31.46,
+              "volume": 2728
+            },
+            {
+              "strike": 330.0,
+              "iv": 30.380000000000003,
+              "volume": 2496
+            },
+            {
+              "strike": 315.0,
+              "iv": 31.679999999999996,
+              "volume": 936
+            },
+            {
+              "strike": 340.0,
+              "iv": 33.19,
+              "volume": 846
+            },
+            {
+              "strike": 320.0,
+              "iv": 32.39,
+              "volume": 785
+            }
+          ],
+          "min_iv": 0.0,
+          "top_oi_strikes": [
+            {
+              "strike": 325.0,
+              "iv": 31.46,
+              "open_interest": 3041
+            },
+            {
+              "strike": 330.0,
+              "iv": 30.380000000000003,
+              "open_interest": 2348
+            },
+            {
+              "strike": 340.0,
+              "iv": 33.19,
+              "open_interest": 2285
+            },
+            {
+              "strike": 327.5,
+              "iv": 31.0,
+              "open_interest": 1477
+            },
+            {
+              "strike": 310.0,
+              "iv": 36.49,
+              "open_interest": 1315
+            }
+          ]
+        },
+        "expiration_date": "2026-02-13",
+        "put_call_ratio": {
+          "volume": 0.9612841482512615,
+          "open_interest": 0.7574250182882224
+        },
+        "days_to_expiration": 0,
+        "available_expirations": [
+          "2026-02-13",
+          "2026-02-20",
+          "2026-02-27",
+          "2026-03-06",
+          "2026-03-13",
+          "2026-03-20",
+          "2026-03-27",
+          "2026-04-17",
+          "2026-05-15",
+          "2026-06-18",
+          "2026-07-17",
+          "2026-08-21",
+          "2026-09-18",
+          "2026-12-18",
+          "2027-01-15",
+          "2027-06-17",
+          "2027-12-17",
+          "2028-01-21",
+          "2028-12-15"
+        ],
+        "puts": {
+          "atm_delta": -0.274,
+          "total_volume": 11049,
+          "atm_iv": 34.81,
+          "total_contracts": 63,
+          "liquid_contracts": 21,
+          "max_iv": 231.3,
+          "total_open_interest": 15531,
+          "atm_strike": 312.5,
+          "avg_implied_volatility": 90.03809523809524,
+          "top_volume_strikes": [
+            {
+              "strike": 302.5,
+              "iv": 41.9,
+              "volume": 1739
+            },
+            {
+              "strike": 320.0,
+              "iv": 31.53,
+              "volume": 1467
+            },
+            {
+              "strike": 315.0,
+              "iv": 32.09,
+              "volume": 1134
+            },
+            {
+              "strike": 310.0,
+              "iv": 35.18,
+              "volume": 1129
+            },
+            {
+              "strike": 312.5,
+              "iv": 34.81,
+              "volume": 872
+            }
+          ],
+          "min_iv": 30.409999999999997,
+          "top_oi_strikes": [
+            {
+              "strike": 310.0,
+              "iv": 35.18,
+              "open_interest": 1890
+            },
+            {
+              "strike": 320.0,
+              "iv": 31.53,
+              "open_interest": 1724
+            },
+            {
+              "strike": 300.0,
+              "iv": 43.38,
+              "open_interest": 1389
+            },
+            {
+              "strike": 315.0,
+              "iv": 32.09,
+              "open_interest": 824
+            },
+            {
+              "strike": 290.0,
+              "iv": 55.43,
+              "open_interest": 603
+            }
+          ]
+        },
+        "liquidity_threshold": 75
+      },
+      "status": "ok",
+      "error": null
+    },
+    "summary": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:10.761180+00:00",
+        "total_call_volume": 11494,
+        "current_price": 311.38,
+        "risk_level": "medium",
+        "sentiment": "neutral",
+        "put_call_ratio_volume": 0.9612841482512615,
+        "atm_put_iv": 34.81,
+        "atm_call_iv": 34.46,
+        "days_to_expiration": 0,
+        "nearest_expiration": "2026-02-13",
+        "total_put_volume": 11049,
+        "symbol": "JPM"
+      },
+      "status": "ok",
+      "error": null
+    },
+    "analysis_version": "1.0",
+    "analyzed_at": "2026-02-12T05:15:05.910784+00:00",
+    "run_id": "analysis_20260212_051505",
+    "symbol": "JPM"
+  },
+  "QBTS": {
+    "comparison_rank": {
+      "data": {
+        "liquid_contracts": 27,
+        "total_volume": 9252,
+        "put_call_ratio": 0.4848338950409244,
+        "atm_iv": 104.86999999999999
+      },
+      "status": "ok",
+      "error": null
+    },
+    "current_price": 19.54,
+    "vehicle_recommendation": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:12.090961+00:00",
+        "spread_width_info": "Width typically 1x ATR equivalent for 3.0% expected move",
+        "vehicle": "option_spread",
+        "volatility_regime": "high",
+        "delta_range": [
+          0.4,
+          0.6
+        ],
+        "reasoning": "High volatility suitable for spreads; consider bull call spread for defined risk",
+        "spread_type": "Bull Call Spread",
+        "expected_move_percent": 3.0,
+        "symbol": "QBTS",
+        "dte_range": [
+          30,
+          45
+        ]
+      },
+      "status": "ok",
+      "error": null
+    },
+    "data_source": "firestore_finnhub",
+    "risk_analysis": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:11.493641+00:00",
+        "opportunities": [
+          "Low Put/Call Volume Ratio (0.48) - bullish sentiment, heavy call buying"
+        ],
+        "symbol": "QBTS",
+        "current_price": 19.54,
+        "risk_warnings": [
+          "High implied volatility (340.7%) - options are expensive, consider selling strategies or spreads",
+          "Short time to expiration (0 days) - high theta decay, rapid price movement needed"
+        ],
+        "calls": {
+          "atm_delta": 0.6101,
+          "total_volume": 6231,
+          "atm_iv": 104.86999999999999,
+          "total_contracts": 59,
+          "liquid_contracts": 17,
+          "max_iv": 1037.06,
+          "total_open_interest": 35644,
+          "atm_strike": 20.0,
+          "avg_implied_volatility": 340.66796610169496,
+          "top_volume_strikes": [
+            {
+              "strike": 21.0,
+              "iv": 109.11999999999999,
+              "volume": 1111
+            },
+            {
+              "strike": 22.0,
+              "iv": 110.92,
+              "volume": 914
+            },
+            {
+              "strike": 26.0,
+              "iv": 129.25,
+              "volume": 771
+            },
+            {
+              "strike": 23.0,
+              "iv": 115.89,
+              "volume": 366
+            },
+            {
+              "strike": 24.0,
+              "iv": 118.12,
+              "volume": 342
+            }
+          ],
+          "min_iv": 104.86999999999999,
+          "top_oi_strikes": [
+            {
+              "strike": 25.0,
+              "iv": 125.6,
+              "open_interest": 6431
+            },
+            {
+              "strike": 23.0,
+              "iv": 115.89,
+              "open_interest": 2905
+            },
+            {
+              "strike": 22.0,
+              "iv": 110.92,
+              "open_interest": 2330
+            },
+            {
+              "strike": 24.0,
+              "iv": 118.12,
+              "open_interest": 2065
+            },
+            {
+              "strike": 23.5,
+              "iv": 121.91000000000001,
+              "open_interest": 1798
+            }
+          ]
+        },
+        "expiration_date": "2026-02-13",
+        "put_call_ratio": {
+          "volume": 0.4848338950409244,
+          "open_interest": 0.3528504096061048
+        },
+        "days_to_expiration": 0,
+        "available_expirations": [
+          "2026-02-13",
+          "2026-02-20",
+          "2026-02-27",
+          "2026-03-06",
+          "2026-03-13",
+          "2026-03-20",
+          "2026-03-27",
+          "2026-04-17",
+          "2026-06-18",
+          "2026-07-17",
+          "2026-09-18",
+          "2026-11-20",
+          "2027-01-15",
+          "2028-01-21"
+        ],
+        "puts": {
+          "atm_delta": -0.2888,
+          "total_volume": 3021,
+          "atm_iv": 102.3,
+          "total_contracts": 59,
+          "liquid_contracts": 10,
+          "max_iv": 1468.1,
+          "total_open_interest": 12577,
+          "atm_strike": 19.5,
+          "avg_implied_volatility": 222.29355932203387,
+          "top_volume_strikes": [
+            {
+              "strike": 20.0,
+              "iv": 107.08,
+              "volume": 581
+            },
+            {
+              "strike": 21.0,
+              "iv": 106.45,
+              "volume": 482
+            },
+            {
+              "strike": 20.5,
+              "iv": 103.03,
+              "volume": 400
+            },
+            {
+              "strike": 19.0,
+              "iv": 107.37999999999998,
+              "volume": 371
+            },
+            {
+              "strike": 18.5,
+              "iv": 107.48,
+              "volume": 235
+            }
+          ],
+          "min_iv": 0.0,
+          "top_oi_strikes": [
+            {
+              "strike": 17.5,
+              "iv": 110.92,
+              "open_interest": 1648
+            },
+            {
+              "strike": 18.0,
+              "iv": 109.59,
+              "open_interest": 1321
+            },
+            {
+              "strike": 20.0,
+              "iv": 107.08,
+              "open_interest": 892
+            },
+            {
+              "strike": 18.5,
+              "iv": 107.48,
+              "open_interest": 617
+            },
+            {
+              "strike": 21.0,
+              "iv": 106.45,
+              "open_interest": 582
+            }
+          ]
+        },
+        "liquidity_threshold": 75
+      },
+      "status": "ok",
+      "error": null
+    },
+    "summary": {
+      "data": {
+        "timestamp": "2026-02-12T05:15:11.889706+00:00",
+        "total_call_volume": 6231,
+        "current_price": 19.54,
+        "risk_level": "high",
+        "sentiment": "bullish",
+        "put_call_ratio_volume": 0.4848338950409244,
+        "atm_put_iv": 102.3,
+        "atm_call_iv": 104.86999999999999,
+        "days_to_expiration": 0,
+        "nearest_expiration": "2026-02-13",
+        "total_put_volume": 3021,
+        "symbol": "QBTS"
+      },
+      "status": "ok",
+      "error": null
+    },
+    "analysis_version": "1.0",
+    "analyzed_at": "2026-02-12T05:15:05.910784+00:00",
+    "run_id": "analysis_20260212_051505",
+    "symbol": "QBTS"
+  }
+}
